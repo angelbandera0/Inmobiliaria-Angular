@@ -1,0 +1,228 @@
+
+
+<!-- Property Submit Section Begin -->
+<section class="property-submit-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <div class="property-submit-form">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="text-center row">
+              <div class="col-md-12">
+                <img src="../../../../assets/img/logo.png" alt="" />
+                <br />
+                <br />
+                <h4>Registrarse en el Sistema</h4>
+              </div>
+              <div class="col-md-6">
+                <p for="inputEmail" class="left">Nombre:</p>
+
+                <input
+                  type="text"
+                  id="inputName"
+                  placeholder="Ingrese el nombre"
+                  name="name"
+                  class="form-control"
+                  formControlName="name"
+                  tooltip="Nombre del dueño de la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="getControl.name.touched && getControl.name.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.name.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                <br />
+                <br />
+              </div>
+              <div class="col-md-6">
+                <p for="inputEmail" class="left">Correo:</p>
+                <input
+                  type="email"
+                  id="inputEmail"
+                  placeholder="Ingrese correo electrónico"
+                  name="email"
+                  class="form-control"
+                  formControlName="email"
+                  tooltip="Email para la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="getControl.email.touched && getControl.email.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.email.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                  <div *ngIf="getControl.email.errors?.email">
+                    Correo inválido.
+                  </div>
+                </div>
+                <br />
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p for="fotoPerfil" class="left">Foto de Perfil:</p>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="form-control custom-file-input"
+                    id="fotoPerfil"
+                    name="fotoPerfil"
+                    aria-describedby="fotoPerfil"
+                    tooltip="Seleccionar imagen de perfil."
+                    (change)="onFileSelect($event, FotoPerfil.files)"
+                    accept="image/*"
+                    #FotoPerfil
+                  />
+                  <label class="custom-file-label" for="customFile">{{
+                    t1
+                  }}</label>
+                </div>
+                <br />
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p for="password" class="left">Contraseña:</p>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  formControlName="password"
+                  tooltip="Nombre del dueño de la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                    getControl.password.touched && getControl.password.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.password.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                <br />
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p for="inputPassword" class="left">Confirme la Contraseña:</p>
+                <input
+                  type="password"
+                  id="inputPasswordConf"
+                  name="passwordconf"
+                  class="form-control"
+                  formControlName="passwordconf"
+                  tooltip="Nombre del dueño de la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    getControl.passwordconf.touched &&
+                    getControl.passwordconf.errors?.required
+                  "
+                >
+                  Es necesario confirmar la contraseña.
+                </span>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    getControl.passwordconf.touched &&
+                    getControl.passwordconf.errors?.passwordMismatch
+                  "
+                >
+                  Las contraseñas no coinciden.
+                </span>
+                <br />
+                <div *ngIf="this.existError" class="alert alert-danger" role="alert">
+                  <b>Han ocurrido los siguientes errores:</b>
+                  <br>
+                  <hr>
+                  <li *ngFor="let error of errorsList; index as i; first as isFirst">
+                    {{error}}
+                  </li>
+                </div>
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p class="left">
+                  Posees una cuenta? <a routerLink="/auth/login" routerLinkActive="active">Iniciar sesión</a>
+                </p>
+                <br />
+                <hr />
+                <br />
+                <div
+                  *ngIf="
+                    this.registerForm.valid;
+                    then thenBlock;
+                    else elseBlock
+                  "
+                ></div>
+                <ng-template #thenBlock>
+                  <div
+                    *ngIf="!this.loading; then thenBlock1; else elseBlock1"
+                  ></div>
+                  <ng-template #thenBlock1
+                    ><button type="submit" class="site-btn">
+                      Registrar Cuenta
+                    </button></ng-template
+                  >
+                  <ng-template #elseBlock1
+                    ><button type="button" class="site-btn" disabled>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span></button
+                  ></ng-template>
+                </ng-template>
+                <ng-template #elseBlock
+                  ><button type="submit" class="site-btn" disabled>
+                    Registrar Cuenta
+                  </button></ng-template
+                >
+
+                <br />
+                <br />
+                <hr />
+                <div>
+                  <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved | This template is made with
+                    <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </p>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Submit Section End -->

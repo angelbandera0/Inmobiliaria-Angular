@@ -1,0 +1,160 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Registrar Nueva Propiedad</h4>
+          <div class="bt-option">
+            <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
+            <span>Registrar propiedad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Property Submit Section Begin -->
+<section class="property-submit-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="property-submit-form">
+          <form action="#">
+            <div class="pf-location">
+              <h4>Localización de la Propiedad</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div
+                    class="nice-select"
+                    tabindex="0"
+                    style="width: 100% !important"
+                  >
+                    <span class="current">{{currentP}}</span>
+                    <ul class="list" style="width: 100% !important">
+                      <li
+                        *ngFor="
+                          let lp of listadoProvincias;
+                          index as i;
+                          first as isFirst
+                        "
+                        data-value="lp.id"
+                        class="option"
+                        (click)="onselectProvincia($event, lp.id)"
+                      >
+                        {{ lp.nombre }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="nice-select"
+                    tabindex="0"
+                    style="width: 100% !important"
+                  >
+                    <span class="current">{{currentM}}</span>
+                    <ul class="list" style="width: 100% !important">
+                      <li
+                        *ngFor="
+                          let lm of listadoMunicipios;
+                          index as i;
+                          first as isFirst
+                        "
+                        data-value="lm"
+                        class="option"
+                        (click)="onselectMunicipio($event, lm)"
+                      >
+                        {{ lm }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <br>
+                <br>
+                  <input
+                    type="text"
+                    name="localidad"
+                    id="localidad"
+                    placeholder="Localidad"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="pf-type">
+              <h4>Tipo de Propiedad</h4>
+              <div class="type-item">
+                <label for="apartamento"
+                  >Apartmento
+                  <input type="checkbox" id="apartamento" />
+                  <span class="checkbox"></span>
+                </label>
+                <label for="pt-house"
+                  >Casa Independiente
+                  <input type="checkbox" id="pt-house" />
+                  <span class="checkbox"></span>
+                </label>
+                <label for="pt-off"
+                  >Casa Semiindependiente
+                  <input type="checkbox" id="pt-off" />
+                  <span class="checkbox"></span>
+                </label>
+                <label for="pt-villa"
+                  >Biplanta
+                  <input type="checkbox" id="pt-villa" />
+                  <span class="checkbox"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="pf-feature-price">
+              <h4>Precio</h4>
+              <div class="fp-inputs">
+                <input type="number" placeholder="Precio" />
+              </div>
+            </div>
+            <div class="pf-property-details">
+              <h4>Características de la Propiedad</h4>
+              <div class="property-details-inputs">
+                <input type="number" placeholder="Baños" />
+                <input type="number" placeholder="Cuartos" />
+                <input type="number" placeholder="Garaje" />
+                <input type="text" placeholder="Patio" />
+                <input type="text" placeholder="Bathrooms" />
+                <input type="text" placeholder="Carpoach" />
+              </div>
+            </div>
+            <div class="pf-title">
+              <h4>Descripción</h4>
+              <textarea
+                class="form-control"
+                name="descripcion"
+                id="descripcion"
+                placeholder="Descripción de la propiedad "
+                rows="6"
+              ></textarea>
+            </div>
+            <div class="pf-feature-image">
+              <h4>Imagenes de la Propiedad</h4>
+              <div class="feature-image-content"></div>
+            </div>
+            <div class="pf-property-details">
+              <button type="submit" class="site-btn">
+                Registrar Propiedad
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Submit Section End -->

@@ -1,0 +1,160 @@
+<!-- Property Submit Section Begin -->
+<section class="property-submit-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <div class="property-submit-form">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="text-center row">
+              <div class="col-md-12">
+                <img src="../../../../assets/img/logo.png" alt="" />
+                <br />
+                <br />
+                <h4>Inciar Sesión en el Sistema</h4>
+              </div>
+              <div class="col-md-12">
+                <p for="inputEmail" class="left">Correo:</p>
+                <input
+                  type="email"
+                  id="inputEmail"
+                  placeholder="Ingrese correo electrónico"
+                  name="email"
+                  class="form-control"
+                  formControlName="email"
+                  tooltip="Email para la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="getControl.email.touched && getControl.email.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.email.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                  <div *ngIf="getControl.email.errors?.email">
+                    Correo inválido.
+                  </div>
+                </div>
+                <br />
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p for="password" class="left">Contraseña:</p>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  formControlName="password"
+                  tooltip="Nombre del dueño de la nueva cuenta."
+                  required
+                  autofocus
+                />
+                <div
+                  *ngIf="
+                    getControl.password.touched && getControl.password.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.password.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                <br />
+                <div *ngIf="this.existError" class="alert alert-danger" role="alert">
+                  <b>Han ocurrido los siguientes errores:</b>
+                  <br>
+                  <hr>
+                  <li *ngFor="let error of errorsList; index as i; first as isFirst">
+                    {{error}}
+                  </li>
+                </div>
+                <br />
+              </div>
+              <div class="col-md-12">
+                <p class="left">
+                  No posees cuenta aún?
+                  <a routerLink="/auth/register" routerLinkActive="active"
+                    >Registrarse.
+                  </a>
+                </p>
+                <br>
+                <hr />
+                <br>
+                <div
+                  *ngIf="
+                    this.loginForm.valid;
+                    then thenBlock;
+                    else elseBlock
+                  "
+                ></div>
+                <ng-template #thenBlock>
+                  <div
+                    *ngIf="!this.loading; then thenBlock1; else elseBlock1"
+                  ></div>
+                  <ng-template #thenBlock1
+                    ><button type="submit" class="site-btn">
+                      Autenticar
+                    </button></ng-template
+                  >
+                  <ng-template #elseBlock1
+                    ><button type="button" class="site-btn" disabled>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span></button
+                  ></ng-template>
+                </ng-template>
+                <ng-template #elseBlock
+                  ><button type="submit" class="site-btn" disabled>
+                    Autenticar
+                  </button></ng-template
+                >
+                <br />
+                <br />
+                <div
+                  id="customBtn"
+                  class="customGPlusSignIn"
+                  (click)="signInWithGoogle()"
+                >
+                  <span class="icon"></span>
+                  <span class="buttonText">Continuar Con Google</span>
+                </div>
+                <br />
+                <br />
+                <hr />
+                <div>
+                  <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved | This template is made with
+                    <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Submit Section End -->
