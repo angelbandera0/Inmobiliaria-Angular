@@ -7,6 +7,9 @@ import { AdicionarCasaComponent } from './adicionar-casa/adicionar-casa.componen
 import { EditarCasaComponent } from './editar-casa/editar-casa.component';
 import { ListadoCasaComponent } from './listado-casa/listado-casa.component';
 
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { ListadoCasaComponent } from './listado-casa/listado-casa.component';
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+
+    DashboardRoutingModule,FormsModule,ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

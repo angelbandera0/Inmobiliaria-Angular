@@ -19,7 +19,12 @@
     </ul>
     <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
     <ng-template #thenBlock
-      ><a routerLink="/dashboard/addcasa" routerLinkActive="active" class="hw-btn">Adicionar Propiedad</a></ng-template
+      ><a
+        routerLink="/dashboard/addcasa"
+        routerLinkActive="active"
+        class="hw-btn"
+        >Adicionar Propiedad</a
+      ></ng-template
     >
     <ng-template #elseBlock
       ><a href="#" class="hw-btn">Propuesta de venta</a></ng-template
@@ -58,7 +63,12 @@
             </ul>
             <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
             <ng-template #thenBlock
-              ><a routerLink="/dashboard/addcasa" routerLinkActive="active" class="hw-btn">Adicionar Propiedad</a></ng-template
+              ><a
+                routerLink="/dashboard/addcasa"
+                routerLinkActive="active"
+                class="hw-btn"
+                >Adicionar Propiedad</a
+              ></ng-template
             >
             <ng-template #elseBlock
               ><a href="#" class="hw-btn">Propuesta de venta</a></ng-template
@@ -101,36 +111,37 @@
           </div>
         </div>
         <div class="col-lg-3">
-
-            <ng-container *ngIf="isLogin; then thenTemplate; else elseTemplate"></ng-container>
-            <ng-template #thenTemplate>
-              <nav class="nav-menu">
-                <ul>
-              <li>
-                <a href="#"><i class="fa fa-user-circle"></i> Bienvenido, {{name}}</a>
-                <ul class="dropdown">
-                  <li ><a href="./property.html">Ver perfil</a></li>
-                  <li ><a href="./property.html">Editar Perfil</a></li>
-                  <li ><a href="./property-details.html">Desconectarse</a></li>
-
-                </ul>
-              </li></ul></nav>
-            </ng-template>
-            <ng-template #elseTemplate>
-              <div class="hn-social">
+          <ng-container
+            *ngIf="isLogin; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            <nav class="nav-menu">
+              <ul>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-user-circle"></i> Bienvenido, {{ name }}</a
+                  >
+                  <ul class="dropdown">
+                    <li><a href="./property.html">Ver perfil</a></li>
+                    <li><a href="./property.html">Editar Perfil</a></li>
+                    <li><a href="./property-details.html">Desconectarse</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </ng-template>
+          <ng-template #elseTemplate>
+            <div class="hn-social">
               <a routerLink="/auth/login" routerLinkActive="active"
-              ><i class="fa fa-user-circle-o"
-                ><span> Iniciar Sesión</span></i
-              ></a
-            >
-            <a routerLink="/auth/register" routerLinkActive="active"
-              ><i class="fa fa-user-plus"> Registrarse</i></a
-            >
-          </div>
-            </ng-template>
-
-
-
+                ><i class="fa fa-user-circle-o"
+                  ><span> Iniciar Sesión</span></i
+                ></a
+              >
+              <a routerLink="/auth/register" routerLinkActive="active"
+                ><i class="fa fa-user-plus"> Registrarse</i></a
+              >
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
