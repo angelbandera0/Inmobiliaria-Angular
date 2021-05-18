@@ -32,6 +32,7 @@ export class AdicionarCasaComponent implements OnInit {
   provincia: Provincia;
   showEspecial = false;
   isLoading = false;
+  existeImagen=false;
   listadoProvincias: ProvinciaM[];
   listadoMunicipios: string[] = [];
   currentP: string = 'Provincia';
@@ -60,7 +61,10 @@ export class AdicionarCasaComponent implements OnInit {
     $('.list').attr('style', 'width: 100% !important');
     console.log(this.listadoProvincias);
     this.propiedadForm = this.formBuilder.group({
-      name: new FormControl('', Validators.required),
+      title: new FormControl('', Validators.required),
+      nombre: new FormControl(''),
+      apellidos: new FormControl(''),
+      numTelefonoPropietario: new FormControl(''),
       localidad: new FormControl('', Validators.required),
       apartamento: new FormControl(false),
       casaindependiente: new FormControl(false),
@@ -110,7 +114,10 @@ export class AdicionarCasaComponent implements OnInit {
     this.clearFormData();
     this.verificarTipoDePropiedad();
 
-    this.formData.append('name', this.propiedadForm?.get('name')?.value);
+    this.formData.append('title', this.propiedadForm?.get('title')?.value);
+    this.formData.append('nombre', this.propiedadForm?.get('nombre')?.value);
+    this.formData.append('apellidos', this.propiedadForm?.get('apellidos')?.value);
+    this.formData.append('numTelefonoPropietario', this.propiedadForm?.get('numTelefonoPropietario')?.value);
     this.formData.append(
       'localidad',
       this.propiedadForm?.get('localidad')?.value
@@ -179,6 +186,7 @@ export class AdicionarCasaComponent implements OnInit {
       console.log(element);
       this.formData.append('archivo', element);
     }
+    this.existeImagen=files.length!=0;
     this.t1 = `Se seleccionaron ${files.length} imágenes.`;
     //console.log(this.formData.get('archivo'));
   }
@@ -210,8 +218,11 @@ export class AdicionarCasaComponent implements OnInit {
 
   //limpia el formData
   clearFormData() {
-    this.formData.delete('name');
+    this.formData.delete('title');
     this.formData.delete('localidad');
+    this.formData.delete('nombre');
+    this.formData.delete('apellidos');
+    this.formData.delete('numTelefonoPropietario');
     this.formData.delete('precio');
     this.formData.delete('tipoPropiedad');
     this.formData.delete('cantBannos');
