@@ -11,7 +11,7 @@ import { CmsComponent } from './layouts/cms/cms.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
-
+import { NgxUiLoaderModule,NgxUiLoaderRouterModule,NgxUiLoaderHttpModule } from "ngx-ui-loader";
 @NgModule({
   declarations: [AppComponent, DashboardComponent, CmsComponent, AuthComponent],
   imports: [
@@ -23,6 +23,7 @@ import { SharedModule } from './modules/shared/shared.module';
     NgbModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    NgxUiLoaderModule,NgxUiLoaderRouterModule,NgxUiLoaderHttpModule
   ],
   providers: [],
   bootstrap: [AppComponent],

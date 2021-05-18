@@ -87,17 +87,17 @@
         <div class="col-lg-6">
           <nav class="nav-menu">
             <ul>
-              <li class="active"><a href="./index.html">Inicio</a></li>
+              <li class="active"><a routerLink="/dashboard" routerLinkActive="active">Inicio</a></li>
               <li>
                 <a href="#">Propiedades</a>
                 <ul class="dropdown">
-                  <li><a href="./property.html">Listado de Propiedades</a></li>
-                  <li><a href="./profile.html">Registrar Propiedad</a></li>
+                  <li><a routerLink="/dashboard/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
+                  <li><a routerLink="/dashboard/addcasa" routerLinkActive="active">Registrar Propiedad</a></li>
                 </ul>
               </li>
-              <li><a href="./agents.html">Agentes</a></li>
-              <li><a href="./about.html">Acerca de</a></li>
-              <li><a href="./contact.html">Contactos</a></li>
+              <li><a routerLink="/dashboard/contactos" routerLinkActive="active">Agentes</a></li>
+              <li><a routerLink="/dashboard/contactos" routerLinkActive="active">Contactos</a></li>
+              <li><a routerLink="/dashboard/acerca" routerLinkActive="active">Acerca de</a></li>
             </ul>
           </nav>
         </div>
@@ -124,7 +124,7 @@
                   <ul class="dropdown">
                     <li><a href="./property.html">Ver perfil</a></li>
                     <li><a href="./property.html">Editar Perfil</a></li>
-                    <li><a href="./property-details.html">Desconectarse</a></li>
+                    <li><a routerLink="/auth/login" routerLinkActive="active">Desconectarse</a></li>
                   </ul>
                 </li>
               </ul>
