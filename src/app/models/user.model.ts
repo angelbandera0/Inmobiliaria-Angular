@@ -1,3 +1,4 @@
+import { Like } from './like.model';
 import { Rol } from './rol.model';
 
 export class User {
@@ -5,6 +6,7 @@ export class User {
   google: boolean;
   createdAt: string;
   updatedAt: string;
+  myLikes: Like[];
   name: string;
   email: string;
   img: string;
@@ -19,9 +21,9 @@ export class User {
     google?: boolean,
     createdAt?: string,
     updatedAt?: string,
+    myLikes?: Like[],
     img?: string,
-    uid?: string,
-
+    uid?: string
   ) {
     this.rol = rol as Rol;
     this.google = google as boolean;
@@ -32,5 +34,6 @@ export class User {
     this.img = img as string;
     this.uid = uid as string;
     this.password = password as string;
+    this.myLikes = myLikes as Like[];
   }
 }
