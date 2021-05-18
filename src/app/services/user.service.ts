@@ -18,4 +18,9 @@ export class UserService {
       data
       );
   }
+  userById(id:string):Observable<any>{
+    return this.http.get<any>(
+      `${environment.server}/users/${id}`
+      );
+  }
 }

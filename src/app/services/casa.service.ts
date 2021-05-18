@@ -1,3 +1,5 @@
+import { GetCasaResponse } from './../models/get-casa-response.model';
+import { ListadoCasaResponse } from './../models/listado-casa-response.model';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -27,5 +29,18 @@ export class CasaService {
       data,
       this.httpOptions
     );
+  }
+
+  listCasas(): Observable<ListadoCasaResponse>{
+    return this.http.get<ListadoCasaResponse>(`${environment.server}/casa`);
+  }
+  deleteCasa(id:string):Observable<any>{
+    return this.http.delete<any>(`${environment.server}/casa/${id}`,this.httpOptions);
+  }
+  updateCasa(id:string,data:FormData):Observable<any>{
+    return this.http.put<any>(`${environment.server}/casa/${id}`,data,this.httpOptions);
+  }
+  getCasaById(id:string): Observable<GetCasaResponse>{
+    return this.http.get<GetCasaResponse>(`${environment.server}/casa/${id}`);
   }
 }
