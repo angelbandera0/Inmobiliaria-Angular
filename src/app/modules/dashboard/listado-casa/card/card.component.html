@@ -1,0 +1,99 @@
+
+  <div class="property-item">
+    <div
+      class="pi-pic set-bg"
+      [ngStyle]="{ 'background-image': 'url(' + casa.img[0] + ')' }"
+    >
+      <div class="label">
+        <a
+          routerLink="/dashboard/editarcasa/{{ casa._id }}"
+          routerLinkActive="active"
+          ><i class="fa fa-edit fa-custom"></i
+        ></a>
+      </div>
+      <div class="label c-magenta">
+        <a
+          routerLink="/dashboard/detallescasa/{{ casa._id }}"
+          routerLinkActive="active"
+          ><i class="fa fa-search fa-custom"></i
+        ></a>
+      </div>
+      <div
+        class="label c-red"
+        (click)="openModalDialogDeletePropiedad(content, casa._id)"
+      >
+        <a><i class="fa fa-remove fa-custom"></i></a>
+      </div>
+    </div>
+    <div class="pi-text">
+     <ng-container *ngIf="isLiked; else elseTemplate">
+        <a (click)="removeLike(like)" class="heart-icon"
+        ><span
+
+          class="icon_heart"
+        ></span
+      ></a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a (click)="addLike(casa._id)" class="heart-icon"
+        ><span
+
+          class="icon_heart_alt"
+        ></span
+      ></a>
+      </ng-template>
+
+
+      <div class="pt-price">{{ casa.precio }}</div>
+      <h5>
+        <a href="#">{{ casa.title }}</a>
+      </h5>
+      <p>
+        <span class="icon_pin_alt"></span>{{ casa.provincia }},
+        {{ casa.municipio }}, {{ casa.localidad }}
+      </p>
+      <ul>
+        <li><i class="fa fa-object-group"></i> 2, 283</li>
+        <li><i class="fa fa-bathtub"></i> {{ casa.cantBannos }}</li>
+        <li><i class="fa fa-bed"></i> {{ casa.cantCuartos }}</li>
+        <li>
+          <i class="fa fa-automobile"></i>
+          {{ casa.tieneGaraje ? "Si" : "No" }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Eliminar propiedad</h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <p><i class="fa fa-warning custom-size"></i></p>
+
+      <b>¿Está seguro de que desea eliminar la propiedad?</b>
+      <p>
+        Una vez que se confirme no hay vueltra atrás y no será posible
+        recuperarla.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+      <button
+        type="button"
+        ngbAutofocus
+        class="site-btn inlb"
+        (click)="deleteCasa()"
+      >
+        Confirmar
+      </button>
+    </div>
+  </ng-template>
