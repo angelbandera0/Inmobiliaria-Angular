@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         console.log(res.user.rol?.rol);
         this.tokenStorage.saveToken(res.token);
+        this.tokenStorage.saveId(res.user.uid);
         this.tokenStorage.saveUsername(res.user.name);
         this.tokenStorage.saveAuthorities(res.user.rol.rol);
         console.log(Roles.USER_ROLE.toString());
@@ -114,6 +115,7 @@ export class LoginComponent implements OnInit {
           next: (res) => {
             console.log(res);
             this.tokenStorage.saveToken(res.token);
+            this.tokenStorage.saveId(res.user.uid);
             this.tokenStorage.saveUsername(res.user.name);
             this.tokenStorage.saveAuthorities(res.user.rol.rol);
             console.log(window.sessionStorage);
