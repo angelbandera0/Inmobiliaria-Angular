@@ -43,4 +43,7 @@ export class CasaService {
   getCasaById(id:string): Observable<GetCasaResponse>{
     return this.http.get<GetCasaResponse>(`${environment.server}/casa/${id}`);
   }
+  buscarCasas(data:FormData): Observable<any>{
+    return this.http.post<any>(`${environment.server}/casa/buscar`,data);
+  }
 }

@@ -23,4 +23,7 @@ export class UserService {
       `${environment.server}/users/${id}`
       );
   }
+  userAgregaciones(id:string): Observable<any>{
+    return this.http.get<any>(`${environment.server}/users/agragaciones/${id}`);
+  }
 }
