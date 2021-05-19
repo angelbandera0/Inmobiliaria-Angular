@@ -31,152 +31,187 @@
       <div class="col-lg-5">
         <div class="change-btn">
           <div class="cb-item">
-            <button type="button" class="site-btn">Adicionar Propiedad</button>
+            <button (click)="search()" type="button" class="site-btn">Buscar Propiedad</button>
           </div>
         </div>
       </div>
     </div>
     <div class="search-form-content">
-      <form action="#" class="filter-form">
-        <select class="sm-width">
-          <option value="">Chose The City</option>
-        </select>
-        <select class="sm-width">
-          <option value="">Location</option>
-        </select>
-        <select class="sm-width">
-          <option value="">Property Status</option>
-        </select>
-        <select class="sm-width">
-          <option value="">Property Type</option>
-        </select>
-        <select class="sm-width">
-          <option value="">No Of Bedrooms</option>
-        </select>
-        <select class="sm-width">
-          <option value="">No Of Bathrooms</option>
-        </select>
-        <div class="room-size-range-wrap sm-width">
-          <div class="price-text">
-            <label for="roomsizeRange">Size:</label>
-            <input type="text" id="roomsizeRange" readonly />
-          </div>
-          <div id="roomsize-range" class="slider"></div>
-        </div>
-        <div class="price-range-wrap sm-width">
-          <div class="price-text">
-            <label for="priceRange">Price:</label>
-            <input type="text" id="priceRange" readonly />
-          </div>
-          <div id="price-range" class="slider"></div>
-        </div>
-        <button type="button" class="search-btn sm-width">Search</button>
-      </form>
-    </div>
-    <div class="more-option">
-      <div class="accordion" id="accordionExample">
-        <div class="card">
-          <div class="card-heading active">
-            <a data-toggle="collapse" data-target="#collapseOne">
-              More Search Options
-            </a>
-          </div>
-          <div
-            id="collapseOne"
-            class="collapse"
-            data-parent="#accordionExample"
-          >
-            <div class="card-body">
-              <div class="mo-list">
-                <div class="ml-column">
-                  <label for="air"
-                    >Air conditioning
-                    <input type="checkbox" id="air" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="lundry"
-                    >Laundry
-                    <input type="checkbox" id="lundry" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="refrigerator"
-                    >Refrigerator
-                    <input type="checkbox" id="refrigerator" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="washer"
-                    >Washer
-                    <input type="checkbox" id="washer" />
-                    <span class="checkbox"></span>
-                  </label>
-                </div>
-                <div class="ml-column">
-                  <label for="barbeque"
-                    >Barbeque
-                    <input type="checkbox" id="barbeque" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="lawn"
-                    >Lawn
-                    <input type="checkbox" id="lawn" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="sauna"
-                    >Sauna
-                    <input type="checkbox" id="sauna" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="wifi"
-                    >Wifi
-                    <input type="checkbox" id="wifi" />
-                    <span class="checkbox"></span>
-                  </label>
-                </div>
-                <div class="ml-column">
-                  <label for="dryer"
-                    >Dryer
-                    <input type="checkbox" id="dryer" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="microwave"
-                    >Microwave
-                    <input type="checkbox" id="microwave" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="pool"
-                    >Swimming Pool
-                    <input type="checkbox" id="pool" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="window"
-                    >Window Coverings
-                    <input type="checkbox" id="window" />
-                    <span class="checkbox"></span>
-                  </label>
-                </div>
-                <div class="ml-column last-column">
-                  <label for="gym"
-                    >Gym
-                    <input type="checkbox" id="gym" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="shower"
-                    >OutdoorShower
-                    <input type="checkbox" id="shower" />
-                    <span class="checkbox"></span>
-                  </label>
-                  <label for="tv"
-                    >Tv Cable
-                    <input type="checkbox" id="tv" />
-                    <span class="checkbox"></span>
-                  </label>
-                </div>
-              </div>
+      <form  class="filter-form">
+        <div class="row sep">
+          <div class="col-md-4 margin-b">
+            <div
+              class="nice-select"
+              tabindex="0"
+              style="width: 100% !important"
+
+            >
+              <span class="current">{{ currentP }}</span>
+              <ul class="list" style="width: 100% !important">
+                <li
+                  *ngFor="
+                    let lp of listadoProvincias;
+                    index as i;
+                    first as isFirst
+                  "
+                  data-value="lp.id"
+                  class="option listt"
+                  (click)="onselectProvincia($event, lp.id)"
+                >
+                  {{ lp.nombre }}
+                </li>
+              </ul>
             </div>
           </div>
+          <div class="col-md-4 margin-b">
+            <div
+              class="nice-select"
+              tabindex="0"
+              style="width: 100% !important"
+            >
+              <span class="current">{{ currentM }}</span>
+              <ul class="list" style="width: 100% !important">
+                <li
+                  *ngFor="
+                    let lm of listadoMunicipios;
+                    index as i;
+                    first as isFirst
+                  "
+                  data-value="lm"
+                  class="option listt"
+                  (click)="onselectMunicipio($event, lm)"
+                >
+                  {{ lm }}
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+
+          <div class="col-md-4 margin-b">
+            <div
+              class="nice-select"
+              tabindex="0"
+              style="width: 100% !important"
+            >
+              <span class="current">{{ currentTP }}</span>
+              <ul class="list" style="width: 100% !important">
+                <li
+                  *ngFor="
+                    let tp of tiposPropiedades;
+
+                  "
+                  data-value="tp"
+                  class="option listt"
+                  (click)="onselectTP($event, tp)"
+                >
+                  {{ tp }}
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="col-md-12 margin-b">
+            <input
+                  type="localidad"
+                  id="localidad"
+                  name="localidad"
+                  class="form-control .inputCust"
+                  (change)="onChangeField($event)"
+                  (keyup)="onChangeField($event)"
+
+                  placeholder="Localidad"
+
+                />
+
+
+          </div>
+          <div class="col-md-4 margin-b">
+            <input
+                  type="precio"
+                  id="precio"
+                  name="precio"
+                  class="form-control .inputCust"
+                  (change)="onChangeField($event)"
+                  (keyup)="onChangeField($event)"
+                  placeholder="Precio"
+
+                />
+
+          </div>
+          <div class="col-md-4 margin-b">
+            <input
+                  type="cantBannos"
+                  id="cantBannos"
+                  name="cantBannos"
+                  class="form-control .inputCust"
+                  (change)="onChangeField($event)"
+                  (keyup)="onChangeField($event)"
+
+                  placeholder="Cantidad de Baños"
+
+                />
+
+          </div>
+          <div class="col-md-4 margin-b">
+            <input
+                  type="cantCuartos"
+                  id="cantCuartos"
+                  name="cantCuartos"
+                  class="form-control .inputCust"
+                  (keyup)="onChangeField($event)"
+                  (change)="onChangeField($event)"
+
+                  placeholder="Cantidad de Cuartos"
+
+                />
+
+          </div>
+          <div class="col-md-4 margin-b">
+            <label for="garaje"
+              >Garaje
+              <input
+                type="checkbox"
+                name="tieneGaraje"
+                class="check"
+                (change)="onChangeField($event)"
+
+                id="garaje"
+              />
+              <span class="checkbox"></span>
+            </label>
+          </div>
+          <div class="col-md-4 margin-b">
+            <label for="patio"
+              >Patio
+              <input
+                type="checkbox"
+                name="tienePatio"
+                (change)="onChangeField($event)"
+
+                id="patio"
+              />
+              <span class="checkbox"></span>
+            </label>
+          </div>
+          <div class="col-md-4 margin-b">
+            <label for="carpoch"
+              >Carpoch
+              <input
+                type="checkbox"
+                name="tieneCarpoch"
+                (change)="onChangeField($event)"
+
+                id="carpoch"
+              />
+              <span class="checkbox"></span>
+            </label>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
+
   </div>
 </section>
 <!-- Search Section End -->
@@ -196,72 +231,7 @@
 
       <app-card  [casa]="casa" [user]="user" (deleteRequest)="loadListado()"></app-card>
       </div>
-      <!--<div *ngFor="let casa of listadoCasas" class="col-lg-4 col-md-6">
-        <div class="property-item">
-          <div
-            class="pi-pic set-bg"
-            [ngStyle]="{ 'background-image': 'url(' + casa.img[0] + ')' }"
-          >
-            <div class="label">
-              <a
-                routerLink="/dashboard/editarcasa/{{ casa._id }}"
-                routerLinkActive="active"
-                ><i class="fa fa-edit fa-custom"></i
-              ></a>
-            </div>
-            <div class="label c-magenta">
-              <a
-                routerLink="/dashboard/detallescasa/{{ casa._id }}"
-                routerLinkActive="active"
-                ><i class="fa fa-search fa-custom"></i
-              ></a>
-            </div>
-            <div
-              class="label c-red"
-              (click)="openModalDialogDeletePropiedad(content, casa._id)"
-            >
-              <a><i class="fa fa-remove fa-custom"></i></a>
-            </div>
-          </div>
-          <div class="pi-text">
-            <ng-container *ngIf="casa.like; else elseTemplate">
-              <a (click)="addLike(casa._id)" class="heart-icon"
-              ><span
 
-                class="icon_heart"
-              ></span
-            ></a>
-            </ng-container>
-            <ng-template #elseTemplate>
-              <a (click)="addLike(casa._id)" class="heart-icon"
-              ><span
-
-                class="icon_heart_alt"
-              ></span
-            ></a>
-            </ng-template>
-
-
-            <div class="pt-price">{{ casa.precio }}</div>
-            <h5>
-              <a href="#">{{ casa.title }}</a>
-            </h5>
-            <p>
-              <span class="icon_pin_alt"></span>{{ casa.provincia }},
-              {{ casa.municipio }}, {{ casa.localidad }}
-            </p>
-            <ul>
-              <li><i class="fa fa-object-group"></i> 2, 283</li>
-              <li><i class="fa fa-bathtub"></i> {{ casa.cantBannos }}</li>
-              <li><i class="fa fa-bed"></i> {{ casa.cantCuartos }}</li>
-              <li>
-                <i class="fa fa-automobile"></i>
-                {{ casa.tieneGaraje ? "Si" : "No" }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>-->
 
       <div class="col-lg-12">
         <div class="loadmore-btn">

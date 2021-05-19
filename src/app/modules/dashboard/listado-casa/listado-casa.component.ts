@@ -1,12 +1,13 @@
+import { TiposPropiedades } from 'src/app/enums/tipos-propiedades.enum';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
-import { LikesService } from './../../../services/likes.service';
 import { CasaService } from './../../../services/casa.service';
 import { Component, OnInit } from '@angular/core';
 import { Casa } from 'src/app/models/casa.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ViewEncapsulation } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { Provincia, ProvinciaM } from 'src/app/models/provincia.model';
 declare var activee: any;
 // Declaro las variables de jQuery
 declare var jQuery: any;
@@ -20,15 +21,39 @@ declare var webGlObject: any;
   styleUrls: ['./listado-casa.component.css'],
 })
 export class ListadoCasaComponent implements OnInit {
+  provincia: Provincia;
+  listadoProvincias: ProvinciaM[];
+  listadoMunicipios: string[] = [];
+  tiposPropiedades: string[] = [];
+  currentP: string = 'Provincia';
+  currentM: string = 'Municipio';
+  currentTP: string = 'Tipo de Propiedad';
   listadoCasas!: Casa[];
   user!: User;
   idDelete!: string;
+  formData=new FormData();
+  obj = {
+    localidad: '',
+    precio: '',
+    cantBannos: '',
+    cantCuartos: '',
+    tieneGaraje: false,
+    tienePatio: false,
+    tieneCarpoch: false,
+  };
+
   constructor(
     private casaService: CasaService,
-    private modalService: NgbModal,
     private userService: UserService,
     private tokenStorageService: TokenStorageService
-  ) {}
+  ) {
+    this.provincia = new Provincia();
+    this.listadoProvincias = this.provincia.listadoProvincias;
+    this.tiposPropiedades.push(TiposPropiedades.APARTAMENTO);
+    this.tiposPropiedades.push(TiposPropiedades.BIPLANTA);
+    this.tiposPropiedades.push(TiposPropiedades.CASA_INDEPENDIENTE);
+    this.tiposPropiedades.push(TiposPropiedades.CASA_SEMI_INDEPENDIENTE);
+  }
 
   async ngOnInit(): Promise<void> {
     activee($);
@@ -63,14 +88,43 @@ export class ListadoCasaComponent implements OnInit {
       },
     });
   }
-  existeLike(likesCasas: any): boolean {
-    for (let i = 0; i < likesCasas.length; i++) {
-      if ((this.user.myLikes as unknown as string[]).includes(likesCasas[i])) {
-        console.log('si');
-        return true;
-      }
+  onselectProvincia(e: any, id: any): void {
+    this.currentP = this.listadoProvincias[id - 1].nombre;
+    this.currentM = this.listadoProvincias[id - 1].municipios[0];
+    console.log(this.currentM);
+    this.listadoMunicipios = this.listadoProvincias[id - 1].municipios;
+  }
+  onselectMunicipio(e: any, nombre: string): void {
+    this.currentM = nombre;
+  }
+  onselectTP(e: any, tp: string): void {
+    this.currentTP =tp;
+  }
+  onChangeField(e:any):void{
+    console.log(e,e.target.value);
+    this.formData.delete(e.target.name);
+    if(e.target.name==="tieneGaraje" || e.target.name==="tienePatio" || e.target.name==="tieneCarpoch"){
+      this.formData.append(e.target.name,e.target.checked);
+      console.log(this.formData.get(e.target.name));
     }
+    else{
+      this.formData.append(e.target.name,e.target.value);
+      console.log(this.formData.get(e.target.name));
 
-    return false;
+    }
+  }
+  search():void{
+    this.formData.delete('municipio');
+    this.formData.delete('provincia');
+    this.formData.delete('tipoPropiedad');
+    console.log(this.currentM==="Provicia",this.currentP);
+    this.formData.append('municipio',this.currentM==="Municipio"?"":this.currentM);
+    this.formData.append('provincia',this.currentP==="Provincia"?"":this.currentP);
+    this.formData.append('tipoPropiedad',this.currentTP==="Tipo de Propiedad"?"":this.currentTP);
+    this.casaService.buscarCasas(this.formData).subscribe({
+      next:(res)=>{console.log(res)},
+      error:(res)=>{console.log(res)},
+    })
+
   }
 }

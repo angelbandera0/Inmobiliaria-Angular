@@ -11,8 +11,6 @@ import { ListadoCasaComponent } from './listado-casa/listado-casa.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetallesCasaComponent } from './detalles-casa/detalles-casa.component';
-import { AcercaComponent } from './acerca/acerca.component';
-import { ContactoComponent } from './contacto/contacto.component';
 import { CardComponent } from './listado-casa/card/card.component';
 import { SearchComponent } from './listado-casa/search/search.component';
 
@@ -21,11 +19,8 @@ import { SearchComponent } from './listado-casa/search/search.component';
   declarations: [
     DashboardComponent,
     AdicionarCasaComponent,
-    EditarCasaComponent,
-    ListadoCasaComponent,
+    EditarCasaComponent,ListadoCasaComponent,
     DetallesCasaComponent,
-    AcercaComponent,
-    ContactoComponent,
     CardComponent,
     SearchComponent
   ],

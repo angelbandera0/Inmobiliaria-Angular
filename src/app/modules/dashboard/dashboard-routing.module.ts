@@ -1,5 +1,3 @@
-import { ContactoComponent } from './contacto/contacto.component';
-import { AcercaComponent } from './acerca/acerca.component';
 import { DetallesCasaComponent } from './detalles-casa/detalles-casa.component';
 import { EditarCasaComponent } from './editar-casa/editar-casa.component';
 import { ListadoCasaComponent } from './listado-casa/listado-casa.component';
@@ -13,8 +11,6 @@ const routes: Routes = [
   { path: 'addcasa', component: AdicionarCasaComponent },
   { path: 'listadocasa', component: ListadoCasaComponent },
   { path: 'editarcasa/:id', component: EditarCasaComponent },
-  { path: 'acerca', component: AcercaComponent },
-  { path: 'contactos', component: ContactoComponent },
   { path: "detallescasa/:id", component: DetallesCasaComponent },
   { path: '**', redirectTo: '/dashboard' }
 ];

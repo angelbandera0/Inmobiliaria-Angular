@@ -32,7 +32,7 @@ export class AdicionarCasaComponent implements OnInit {
   provincia: Provincia;
   showEspecial = false;
   isLoading = false;
-  existeImagen=false;
+  existeImagen = false;
   listadoProvincias: ProvinciaM[];
   listadoMunicipios: string[] = [];
   currentP: string = 'Provincia';
@@ -94,30 +94,31 @@ export class AdicionarCasaComponent implements OnInit {
   ngAfterViewInit() {
     //this.prov.nativeElement.insertAdjacentHTML('beforeend', '<option values="" _ngcontent-rig-c110="">two</option>');
   }
-  onselectProvincia(e: any, id: any) {
-    //console.log(e);
-    //console.log(id);
+  onselectProvincia(e: any, id: any): void {
     this.currentP = this.listadoProvincias[id - 1].nombre;
     this.currentM = this.listadoProvincias[id - 1].municipios[0];
     console.log(this.currentM);
     this.listadoMunicipios = this.listadoProvincias[id - 1].municipios;
-    //console.log(this.listadoMunicipios);
   }
-  onselectMunicipio(e: any, nombre: string) {
-    //console.log(this.currentM + '1');
-
+  onselectMunicipio(e: any, nombre: string): void {
     this.currentM = nombre;
   }
   onSubmit(): void {
     console.log(this.propiedadForm);
-    this.isLoading=true;
+    this.isLoading = true;
     this.clearFormData();
     this.verificarTipoDePropiedad();
 
     this.formData.append('title', this.propiedadForm?.get('title')?.value);
     this.formData.append('nombre', this.propiedadForm?.get('nombre')?.value);
-    this.formData.append('apellidos', this.propiedadForm?.get('apellidos')?.value);
-    this.formData.append('numTelefonoPropietario', this.propiedadForm?.get('numTelefonoPropietario')?.value);
+    this.formData.append(
+      'apellidos',
+      this.propiedadForm?.get('apellidos')?.value
+    );
+    this.formData.append(
+      'numTelefonoPropietario',
+      this.propiedadForm?.get('numTelefonoPropietario')?.value
+    );
     this.formData.append(
       'localidad',
       this.propiedadForm?.get('localidad')?.value
@@ -150,18 +151,18 @@ export class AdicionarCasaComponent implements OnInit {
     this.casaService.createCasa(this.formData).subscribe({
       next: (res) => {
         console.log(res);
-        this.isLoading=false;
+        this.isLoading = false;
       },
       complete: () => {
         this.notificationsToastrService.showSuccess(
           'La propiedad se registro con éxito'
         );
-        this.isLoading=false;
+        this.isLoading = false;
         console.log('Complete');
       },
       error: (error) => {
         console.log(error);
-        this.isLoading=false;
+        this.isLoading = false;
         this.notificationsToastrService.showError(
           'No se pudo completar el registro.'
         );
@@ -186,7 +187,7 @@ export class AdicionarCasaComponent implements OnInit {
       console.log(element);
       this.formData.append('archivo', element);
     }
-    this.existeImagen=files.length!=0;
+    this.existeImagen = files.length != 0;
     this.t1 = `Se seleccionaron ${files.length} imágenes.`;
     //console.log(this.formData.get('archivo'));
   }
