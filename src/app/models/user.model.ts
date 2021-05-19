@@ -1,5 +1,6 @@
 import { Like } from './like.model';
 import { Rol } from './rol.model';
+import { Solicitud } from './solicitud.model';
 
 export class User {
   rol: Rol;
@@ -9,9 +10,10 @@ export class User {
   myLikes: Like[];
   name: string;
   email: string;
-  img: string;
+  image: string;
   uid: string;
   password: string;
+  solicitudes:Solicitud[]
 
   constructor(
     name?: string,
@@ -22,7 +24,8 @@ export class User {
     createdAt?: string,
     updatedAt?: string,
     myLikes?: Like[],
-    img?: string,
+    solicitudes?: Solicitud[],
+    image?: string,
     uid?: string
   ) {
     this.rol = rol as Rol;
@@ -31,9 +34,10 @@ export class User {
     this.updatedAt = updatedAt as string;
     this.name = name as string;
     this.email = email as string;
-    this.img = img as string;
+    this.image = image as string;
     this.uid = uid as string;
     this.password = password as string;
     this.myLikes = myLikes as Like[];
+    this.solicitudes = solicitudes as Solicitud[];
   }
 }
