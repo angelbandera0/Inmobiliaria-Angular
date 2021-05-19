@@ -5,7 +5,7 @@
     <span class="icon_close"></span>
   </div>
   <div class="logo">
-    <a routerLink="/"
+    <a routerLink="/dashboard"
     routerLinkActive="active">
       <img src="./assets/img/logo.png" alt="" />
     </a>
@@ -28,8 +28,7 @@
       ></ng-template
     >
     <ng-template #elseBlock
-      ><a routerLink="/addsolicitud"
-      routerLinkActive="active" class="hw-btn">Propuesta de venta</a></ng-template
+      ><a href="#" class="hw-btn">Propuesta de venta</a></ng-template
     >
   </div>
   <div class="om-social">
@@ -49,9 +48,8 @@
       <div class="row">
         <div class="col-lg-2">
           <div class="logo">
-            <a class="point" routerLink="/"
-            routerLinkActive="active"
-              ><img class="point" src="./assets/img/logo.png" alt=""
+            <a href="./index.html"
+              ><img src="./assets/img/logo.png" alt=""
             /></a>
           </div>
         </div>
@@ -93,17 +91,25 @@
               <li>
                 <a href="#">Propiedades</a>
                 <ul class="dropdown">
+                  <li *ngIf="isAdmin"><a routerLink="/dashboard/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
                   <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
-                  </ul>
+                  <li *ngIf="isAdmin"><a routerLink="/dashboard/addcasa" routerLinkActive="active">Registrar Propiedad</a></li>
+                </ul>
               </li>
               <li>
                 <a href="#">Solicitudes</a>
                 <ul class="dropdown">
-                  <li *ngIf="!isAdmin"><a routerLink="/addsolicitud" routerLinkActive="active">Solicitud de Venta</a></li>
+                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Solicitud de Venta</a></li>
                 </ul>
               </li>
-              <li *ngIf="!isAdmin"><a routerLink="/contactos" routerLinkActive="active">Contactos</a></li>
-              <li *ngIf="!isAdmin"><a routerLink="/acerca" routerLinkActive="active">Acerca de</a></li>
+              <li>
+                <a href="#">Citas</a>
+                <ul class="dropdown">
+                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Solicitar cita</a></li>
+                </ul>
+              </li>
+              <li *ngIf="!isAdmin"><a routerLink="/dashboard/contactos" routerLinkActive="active">Contactos</a></li>
+              <li *ngIf="!isAdmin"><a routerLink="/dashboard/acerca" routerLinkActive="active">Acerca de</a></li>
             </ul>
           </nav>
         </div>
@@ -128,8 +134,9 @@
                     ><i class="fa fa-user-circle"></i> Bienvenido, {{ name }}</a
                   >
                   <ul class="dropdown">
-                    <li><a routerLink="/detallesuser/{{id}}" routerLinkActive="active">Ver perfil</a></li>
-                    <li class="point" (click)="logout()"><a >Desconectarse</a></li>
+                    <li><a href="./property.html">Ver perfil</a></li>
+                    <li><a routerLink="/auth/login" routerLinkActive="active">Editar Perfil</a></li>
+                    <li (click)="logout()"><a >Desconectarse</a></li>
                   </ul>
                 </li>
               </ul>
