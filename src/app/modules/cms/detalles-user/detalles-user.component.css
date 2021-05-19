@@ -1,0 +1,15 @@
+.about-pic {
+  height: 350px !important;
+}
+.collg12{
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+}
+.pd-text .pd-board .tab-board .nav-tabs .nav-item a{
+  color: #00C89E;
+}
+.pd-text .pd-board .tab-board .nav-tabs {
+  background: none;
+}
+.pd-text .pd-board .tab-board .nav-tabs .nav-item a.active {
+  color: #ffffff;}
