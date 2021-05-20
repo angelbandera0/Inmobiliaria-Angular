@@ -18,6 +18,9 @@ declare var webGlObject: any;
   styleUrls: ['./listado-casa-cms.component.css'],
 })
 export class ListadoCasaCmsComponent implements OnInit {
+  posInicialMostrar: number = 0;
+  limiteMostrar: number = 15;
+  totalCasa!:number;
   provincia: Provincia;
   listadoProvincias: ProvinciaM[];
   listadoMunicipios: string[] = [];
@@ -25,7 +28,7 @@ export class ListadoCasaCmsComponent implements OnInit {
   currentP: string = 'Provincia';
   currentM: string = 'Municipio';
   currentTP: string = 'Tipo de Propiedad';
-  listadoCasas!: Casa[];
+  listadoCasas: Casa[]=[];
   user: User = new User();
   idDelete!: string;
   formData = new FormData();
@@ -71,9 +74,12 @@ export class ListadoCasaCmsComponent implements OnInit {
   }
 
   async loadListado(): Promise<void> {
-    this.casaService.listCasas().subscribe({
+    this.restartPagination();
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
       next: (res) => {
+        console.log(res);
         this.listadoCasas = res.casas;
+        this.totalCasa=res.total;
         console.log(this.listadoCasas);
       },
       complete: () => {
@@ -120,13 +126,14 @@ export class ListadoCasaCmsComponent implements OnInit {
       this.formData.append(e.target.name, e.target.checked);
       console.log(this.formData.get(e.target.name));
     } else {
-      if(e.target.value!==""){
-      this.formData.append(e.target.name, e.target.value);
+      if (e.target.value !== '') {
+        this.formData.append(e.target.name, e.target.value);
       }
       console.log(this.formData.get(e.target.name));
     }
   }
   search(): void {
+    this.restartPagination();
     this.formData.delete('municipio');
     this.formData.delete('provincia');
     this.formData.delete('tipoPropiedad');
@@ -140,9 +147,9 @@ export class ListadoCasaCmsComponent implements OnInit {
     if (this.currentTP !== 'Tipo de Propiedad') {
       this.formData.append('tipoPropiedad', this.currentTP);
     }
-    this.casaService.buscarCasas(this.formData).subscribe({
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
       next: (res) => {
-        console.log(res.casas);
+        console.log(res);
         this.listadoCasas = res.casas;
       },
       error: (res) => {
@@ -150,4 +157,26 @@ export class ListadoCasaCmsComponent implements OnInit {
       },
     });
   }
+  restartPagination(): void {
+    this.posInicialMostrar = 0;
+    this.limiteMostrar = 15;
+  }
+  mostrarMas(){
+    console.log('A:',this.posInicialMostrar);
+    this.posInicialMostrar+=this.limiteMostrar;
+    console.log('D:',this.posInicialMostrar);
+    console.log('L:',this.listadoCasas.length);
+
+
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
+      next: (res) => {
+        this.listadoCasas=this.listadoCasas.concat(res.casas);
+        //this.listadoCasas = res.casas;
+      },
+      error: (res) => {
+        console.log(res);
+      },
+    });
+  }
+
 }

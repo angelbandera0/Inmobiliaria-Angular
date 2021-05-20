@@ -132,3 +132,8 @@ select {
   padding: .5rem;
 }
 
+.loadmore-btn{
+  cursor: pointer;
+  color: white;
+}
+
