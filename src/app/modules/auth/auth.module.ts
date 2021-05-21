@@ -22,7 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '138460196788-44lbh5vtkljc25uvomhg63gll99kfk3u.apps.googleusercontent.com'
+              '767767601506-k588irla2mtd18uvut6ej0ha8g0lbgpt.apps.googleusercontent.com'
             ),
           },
         ],

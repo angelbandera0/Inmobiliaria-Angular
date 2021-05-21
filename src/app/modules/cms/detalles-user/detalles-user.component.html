@@ -54,6 +54,15 @@
                               <p>{{parserFecha(user.updatedAt)}}</p>
                           </div>
                       </div>
+                      <div class="af-item">
+                        <div class="af-text">
+                            <h6>Operaciones:</h6>
+                            <ul>
+                            <li><a routerLink="/cambiarpassword/{{user.uid}}" routerLinkActive="active">Cambiar contraseña</a></li>
+                            <li><a routerLink="/editaruser/{{user.uid}}" routerLinkActive="active">Editar Perfil</a></li>
+                            </ul>
+                        </div>
+                    </div>
                   </div>
               </div>
           </div>
