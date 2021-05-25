@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetallesUserComponent } from './detalles-user/detalles-user.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { EditarUserComponent } from './editar-user/editar-user.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
     AddSolicitudCmsComponent,
     DetallesUserComponent,
     ListadoSolicitudesComponent,
+    EditarUserComponent,
   ],
   imports: [
     CommonModule,

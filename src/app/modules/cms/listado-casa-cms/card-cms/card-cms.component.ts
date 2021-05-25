@@ -23,7 +23,8 @@ export class CardCmsComponent implements OnInit {
   constructor(
     private casaService: CasaService,
     private likesService: LikesService,
-    private modalService: NgbModal,private tokenStorageService:TokenStorageService
+    private modalService: NgbModal,
+    private tokenStorageService:TokenStorageService
   ) {
     console.log(this.user);
     this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
