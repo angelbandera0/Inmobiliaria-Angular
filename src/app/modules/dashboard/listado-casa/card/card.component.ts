@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Roles } from 'src/app/enums/roles.enum';
 import { Casa } from 'src/app/models/casa.model';
 import { User } from 'src/app/models/user.model';
 import { CasaService } from 'src/app/services/casa.service';
 import { LikesService } from 'src/app/services/likes.service';
+import { NotificationsToastrService } from 'src/app/services/notifications-toastr.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 declare var activee: any;
 // Declaro las variables de jQuery
 declare var jQuery: any;
@@ -21,12 +24,19 @@ export class CardComponent implements OnInit {
   @Output() deleteRequest = new EventEmitter<string>();
   idDelete!: string;
   isLiked = false;
+  isUser=false;
   like:any;
   constructor(
     private casaService: CasaService,
     private likesService: LikesService,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal,
+    private tokenStorageService:TokenStorageService,
+    private notificationsToastrService:NotificationsToastrService
+
+  ) {
+    console.log(this.user);
+    this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
+  }
 
   ngOnInit(): void {
     for (let i = 0; i < this.casa.likes.length; i++) {
@@ -52,10 +62,13 @@ export class CardComponent implements OnInit {
       complete: () => {
         console.log('complete');
         this.modalService.dismissAll();
+        this.notificationsToastrService.showSuccess('La propiedad se eliminó correctamente.');
         this.deleteRequest.emit();
       },
       error: (e) => {
         console.log('error');
+        this.notificationsToastrService.showSuccess('Ocurrión un error al eliminar la propiedad.');
+
       },
     });
   }

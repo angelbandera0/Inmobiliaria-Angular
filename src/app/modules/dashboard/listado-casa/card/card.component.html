@@ -26,6 +26,7 @@
       </div>
     </div>
     <div class="pi-text">
+      <div *ngIf="isUser && user">
      <ng-container *ngIf="isLiked; else elseTemplate">
         <a (click)="removeLike(like)" class="heart-icon"
         ><span
@@ -42,11 +43,13 @@
         ></span
       ></a>
       </ng-template>
+    </div>
 
 
       <div class="pt-price">{{ casa.precio }}</div>
       <h5>
-        <a href="#">{{ casa.title }}</a>
+        <a routerLink="/dashboard/detallescasa/{{ casa._id }}"
+        routerLinkActive="active">{{ casa.title }}</a>
       </h5>
       <p>
         <span class="icon_pin_alt"></span>{{ casa.provincia }},

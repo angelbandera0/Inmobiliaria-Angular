@@ -21,6 +21,9 @@ declare var webGlObject: any;
   styleUrls: ['./listado-casa.component.css'],
 })
 export class ListadoCasaComponent implements OnInit {
+  posInicialMostrar: number = 0;
+  limiteMostrar: number = 15;
+  totalCasa!:number;
   provincia: Provincia;
   listadoProvincias: ProvinciaM[];
   listadoMunicipios: string[] = [];
@@ -45,7 +48,7 @@ export class ListadoCasaComponent implements OnInit {
   constructor(
     private casaService: CasaService,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
   ) {
     this.provincia = new Provincia();
     this.listadoProvincias = this.provincia.listadoProvincias;
@@ -57,14 +60,29 @@ export class ListadoCasaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     activee($);
-    await this.getUser();
-    await this.loadListado();
+    const id = this.tokenStorageService.getId();
+    this.userService.userById(id ? id : 'none').subscribe({
+      next: (res) => {
+        console.log(res);
+        this.user = res.user;
+        console.log(this.user.myLikes);
+        this.loadListado();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+
+    console.log('object');
   }
 
   async loadListado(): Promise<void> {
-    this.casaService.listCasas().subscribe({
+    this.restartPagination();
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
       next: (res) => {
+        console.log(res);
         this.listadoCasas = res.casas;
+        this.totalCasa=res.total;
         console.log(this.listadoCasas);
       },
       complete: () => {
@@ -100,31 +118,67 @@ export class ListadoCasaComponent implements OnInit {
   onselectTP(e: any, tp: string): void {
     this.currentTP =tp;
   }
-  onChangeField(e:any):void{
-    console.log(e,e.target.value);
+  onChangeField(e: any): void {
+    console.log(e, e.target.value);
     this.formData.delete(e.target.name);
-    if(e.target.name==="tieneGaraje" || e.target.name==="tienePatio" || e.target.name==="tieneCarpoch"){
-      this.formData.append(e.target.name,e.target.checked);
+    if (
+      e.target.name === 'tieneGaraje' ||
+      e.target.name === 'tienePatio' ||
+      e.target.name === 'tieneCarpoch'
+    ) {
+      this.formData.append(e.target.name, e.target.checked);
       console.log(this.formData.get(e.target.name));
-    }
-    else{
-      this.formData.append(e.target.name,e.target.value);
+    } else {
+      if (e.target.value !== '') {
+        this.formData.append(e.target.name, e.target.value);
+      }
       console.log(this.formData.get(e.target.name));
-
     }
   }
-  search():void{
+  search(): void {
+    this.restartPagination();
     this.formData.delete('municipio');
     this.formData.delete('provincia');
     this.formData.delete('tipoPropiedad');
-    console.log(this.currentM==="Provicia",this.currentP);
-    this.formData.append('municipio',this.currentM==="Municipio"?"":this.currentM);
-    this.formData.append('provincia',this.currentP==="Provincia"?"":this.currentP);
-    this.formData.append('tipoPropiedad',this.currentTP==="Tipo de Propiedad"?"":this.currentTP);
-    this.casaService.buscarCasas(this.formData).subscribe({
-      next:(res)=>{console.log(res)},
-      error:(res)=>{console.log(res)},
-    })
+    console.log(this.currentM === 'Provicia', this.currentP);
+    if (this.currentM !== 'Municipio') {
+      this.formData.append('municipio', this.currentM);
+    }
+    if (this.currentP !== 'Provincia') {
+      this.formData.append('provincia', this.currentP);
+    }
+    if (this.currentTP !== 'Tipo de Propiedad') {
+      this.formData.append('tipoPropiedad', this.currentTP);
+    }
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.listadoCasas = res.casas;
+      },
+      error: (res) => {
+        console.log(res);
+      },
+    });
+  }
+  restartPagination(): void {
+    this.posInicialMostrar = 0;
+    this.limiteMostrar = 15;
+  }
+  mostrarMas(){
+    console.log('A:',this.posInicialMostrar);
+    this.posInicialMostrar+=this.limiteMostrar;
+    console.log('D:',this.posInicialMostrar);
+    console.log('L:',this.listadoCasas.length);
 
+
+    this.casaService.buscarCasas(this.formData,this.posInicialMostrar,this.limiteMostrar).subscribe({
+      next: (res) => {
+        this.listadoCasas=this.listadoCasas.concat(res.casas);
+        //this.listadoCasas = res.casas;
+      },
+      error: (res) => {
+        console.log(res);
+      },
+    });
   }
 }
