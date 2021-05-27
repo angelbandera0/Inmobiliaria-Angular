@@ -26,4 +26,7 @@ export class UserService {
   userAgregaciones(id:string): Observable<any>{
     return this.http.get<any>(`${environment.server}/users/agregaciones/${id}`);
   }
+  userPut(id:string,data:FormData):Observable<any>{
+    return this.http.put<any>(`${environment.server}/users/${id}`,data);
+  }
 }

@@ -1,0 +1,199 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Listado de Citas</h4>
+          <div class="bt-option">
+            <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
+            <span>Listado de Citas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<section class="property-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <h4>Listado de Citas</h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="nice-select" tabindex="0" style="width: 100% !important">
+          <span class="current">No Aprobadas</span>
+          <ul class="list" style="width: 100% !important">
+            <li
+              data-value="Aprobada"
+              class="option"
+              (click)="onSelectEstado('Aprobada')"
+            >
+              Aprobadas
+            </li>
+            <li
+              data-value="No Aprobada"
+              class="option"
+              (click)="onSelectEstado('No Aprobada')"
+            >
+              No Aprobadas
+            </li>
+          </ul>
+        </div>
+        <br>
+
+      </div>
+      <div class="col-md-6">
+        <br>
+
+      </div>
+      <div class="col-md-3">
+        <input
+          type="text"
+          id="buscar"
+          placeholder="Buscar"
+          name="buscar"
+          class="form-control"
+          (keyup)="search($event)"
+        />
+        <br>
+
+      </div>
+      <div class="col-md-12">
+        <table class="table table-borderless table-responsive-xl table-striped">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Propiedad</th>
+              <th>Solicitante</th>
+              <th id="estado" (click)="sortTable($event)">
+                <i
+                  [ngClass]="
+                    sortHeadCol.get('estado')
+                      ? 'fa fa-arrow-up'
+                      : 'fa fa-arrow-down'
+                  "
+                ></i>
+                Estado
+              </th>
+              <th id="fecha" (click)="sortTable($event)">
+                <i
+                  [ngClass]="
+                    sortHeadCol.get('fecha')
+                      ? 'fa fa-arrow-up'
+                      : 'fa fa-arrow-down'
+                  "
+                ></i>
+                Fecha
+              </th>
+              <th id="createdAt" (click)="sortTable($event)">
+                <i
+                  [ngClass]="
+                    sortHeadCol.get('createdAt')
+                      ? 'fa fa-arrow-up'
+                      : 'fa fa-arrow-down'
+                  "
+                ></i>
+                Creada
+              </th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template ngFor let-item [ngForOf]="citasCurrent" let-i="index">
+              <tr>
+                <td>{{ i + 1 + (page - 1) * pageSize }}</td>
+                <td>
+                  <a
+                    routerLink="/dashboard/detallescasa/{{ item.casa._id }}"
+                    routerLinkActive="active"
+                    >Ver propiedad</a
+                  >
+                </td>
+                <td><a href="#">Datos del Solicitante</a></td>
+                <td
+                  [ngClass]="
+                    item.estado == 'No Aprobada'
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <b>{{ item.estado }}</b>
+                </td>
+                <td>{{ parserFecha(item.fecha) }}</td>
+                <td>{{ parserFecha(item.createdAt) }}</td>
+                <td>
+                  <a
+                    routerLink="/detallescita/{{ item._id }}"
+                    routerLinkActive="active"
+                    ><i class="fa fa-search"></i
+                  ></a>
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>No.</th>
+              <th>Detalles</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+              <th>Creada</th>
+              <th>Acciones</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="col-md-9"></div>
+      <div class="col-md-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <ng-container *ngIf="isDisablePrev; else elseTemplate">
+              <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true"
+                  >Anterior</a
+                >
+              </li>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <li class="page-item" (click)="onPrev($event)">
+                <a class="page-link">Anterior</a>
+              </li>
+            </ng-template>
+
+            <li
+              *ngFor="let item of currentP; index as i"
+              [ngClass]="item == page ? 'page-item active' : 'page-item'"
+              aria-current="page"
+              (click)="onSelectPage($event, item)"
+            >
+              <a class="page-link">{{ item }}</a>
+            </li>
+            <ng-container *ngIf="isDisableNext; else elseTemplate1">
+              <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true"
+                  >Siguiente</a
+                >
+              </li>
+            </ng-container>
+            <ng-template #elseTemplate1>
+              <li class="page-item" (click)="onNext($event)">
+                <a class="page-link">Siguiente</a>
+              </li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</section>

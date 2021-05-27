@@ -13,6 +13,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetallesCasaComponent } from './detalles-casa/detalles-casa.component';
 import { CardComponent } from './listado-casa/card/card.component';
 import { SearchComponent } from './listado-casa/search/search.component';
+import { ListadoSolicitudesDashComponent } from './listado-solicitudes-dash/listado-solicitudes-dash.component';
+import { ListadoCitasDashComponent } from './listado-citas-dash/listado-citas-dash.component';
+import { DetallesCitaComponent } from './detalles-cita/detalles-cita.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { SearchComponent } from './listado-casa/search/search.component';
     EditarCasaComponent,ListadoCasaComponent,
     DetallesCasaComponent,
     CardComponent,
-    SearchComponent
+    SearchComponent,
+    ListadoSolicitudesDashComponent,
+    ListadoCitasDashComponent,
+    DetallesCitaComponent
   ],
   imports: [
     CommonModule,

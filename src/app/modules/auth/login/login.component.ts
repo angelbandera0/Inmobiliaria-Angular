@@ -95,9 +95,11 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       },
       error: (res) => {
-        this.errorsList.push(res.error.msg);
-
-        console.log(this.errorsList);
+        if (!res.error.msg) {
+          this.errorsList.push(res.error.errors[0].msg);
+        } else {
+          this.errorsList.push(res.error.msg);
+        }
         this.existError = true;
         this.loading = false;
       },
