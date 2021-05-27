@@ -92,20 +92,19 @@
                 <a href="#">Propiedades</a>
                 <ul class="dropdown">
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
-                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/addcasa" routerLinkActive="active">Registrar Propiedad</a></li>
                 </ul>
               </li>
               <li>
                 <a href="#">Solicitudes</a>
                 <ul class="dropdown">
-                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Solicitud de Venta</a></li>
+                  <li *ngIf="isAdmin"><a routerLink="/dashboard/listadosolicitudes" routerLinkActive="active">Listado de Solicitudes</a></li>
                 </ul>
               </li>
               <li>
                 <a href="#">Citas</a>
                 <ul class="dropdown">
-                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Solicitar cita</a></li>
+                  <li *ngIf="isAdmin"><a routerLink="/dashboard/listadocitas" routerLinkActive="active">Listado de Citas</a></li>
                 </ul>
               </li>
               <li *ngIf="!isAdmin"><a routerLink="/dashboard/contactos" routerLinkActive="active">Contactos</a></li>
@@ -134,9 +133,8 @@
                     ><i class="fa fa-user-circle"></i> Bienvenido, {{ name }}</a
                   >
                   <ul class="dropdown">
-                    <li><a href="./property.html">Ver perfil</a></li>
-                    <li><a routerLink="/auth/login" routerLinkActive="active">Editar Perfil</a></li>
-                    <li (click)="logout()"><a >Desconectarse</a></li>
+                    <li><a routerLink="/detallesuser/{{id}}" routerLinkActive="active">Ver perfil</a></li>
+                    <li class="point" (click)="logout()"><a >Desconectarse</a></li>
                   </ul>
                 </li>
               </ul>

@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+      <ng-container *ngIf="isDisablePrev; else elseTemplate">
+        <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anteriorrr</a>
+        </li>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <li class="page-item"><a class="page-link" href="#">Anteriorrrr</a></li>
+      </ng-template>
+
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Siguiente</a>
+    </li>
+  </ul>
+</nav>
