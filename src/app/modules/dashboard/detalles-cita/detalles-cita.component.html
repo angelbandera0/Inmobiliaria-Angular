@@ -1,1 +1,387 @@
-<p>detalles-cita works!</p>
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Detalles de la Cita</h4>
+          <div class="bt-option">
+            <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
+            <span>Detalles de la Cita</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<section *ngIf="cita" class="property-section spad non-pad-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h4>Información de la Cita</h4>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <button
+          type="submit"
+          class="site-btn alig"
+          (click)="openModalDialogConfirm(confirm)"
+        >
+          Aprobar
+        </button>
+      </div>
+      <div class="col-lg-2">
+        <button
+          type="submit"
+          class="site-btn color-red alig"
+          (click)="openModalDialogCancel(cancel)"
+        >
+          Denegar
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5>Estado de aprobación:</h5>
+        <p
+          [ngClass]="
+            cita.estado == 'Pendiente' ? 'text-warning' : 'text-success'
+          "
+        >
+          <b>{{ cita.estado }}</b>
+        </p>
+        <br />
+      </div>
+      <div class="col-md-12">
+        <h5>Información:</h5>
+        <ng-container *ngIf="cita.detallesCita; else elseTemplate">
+          <p>{{ cita.detallesCita }}</p>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <p>No se han brindado detalles sobre las cita.</p>
+          <br />
+        </ng-template>
+        <br />
+      </div>
+      <div class="col-md-12">
+        <h5>Fecha de encuentro:</h5>
+        <ng-container *ngIf="cita.fecha; else elseTemplate">
+          <p>{{ parserFecha(cita.fecha) }}</p>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <p>No se ha establecido una fecha aún.</p>
+        </ng-template>
+        <br />
+      </div>
+      <div class="col-md-12">
+        <h5>Fecha de registro:</h5>
+        <p>{{ parserFecha(cita.createdAt) }}</p>
+      </div>
+      <div class="col-md-12">
+        <hr />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Details Section Begin -->
+<section *ngIf="cita" class="property-details-section">
+  <div *ngIf="cita" class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="pd-text">
+          <div class="row titleP">
+            <div class="col-lg-6">
+              <div class="pd-title">
+                <h4><b>Datos Asociados</b></h4>
+              </div>
+            </div>
+          </div>
+          <div class="pd-board">
+            <div class="tab-board">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-toggle="tab"
+                    href="#tabs-1"
+                    role="tab"
+                    >Información General</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#tabs-2"
+                    role="tab"
+                    >Descripción</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#tabs-3"
+                    role="tab"
+                    >Datos del Propietario</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#tabs-4"
+                    role="tab"
+                    >Usuario Solicitante</a
+                  >
+                </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                  <div class="tab-details">
+                    <ul class="left-table">
+                      <li>
+                        <span class="type-name">Tipo de Propiedad</span>
+                        <span class="type-value">{{
+                          cita.casa.tipoPropiedad
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Precio</span>
+                        <span class="type-value"
+                          >{{ cita.casa.precio }} CUP</span
+                        >
+                      </li>
+                      <li>
+                        <span class="type-name">Baños</span>
+                        <span class="type-value">{{
+                          cita.casa.cantBannos
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Cuartos</span>
+                        <span class="type-value">{{
+                          cita.casa.cantCuartos
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Garaje?</span>
+                        <span class="type-value">{{
+                          cita.casa.tieneGaraje ? "Si" : "No"
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Patio?</span>
+                        <span class="type-value">{{
+                          cita.casa.tienePatio ? "Si" : "No"
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Carpoch?</span>
+                        <span class="type-value">{{
+                          cita.casa.tieneCarpoch ? "Si" : "No"
+                        }}</span>
+                      </li>
+                    </ul>
+                    <ul class="right-table">
+                      <li>
+                        <span class="type-name">Provincia</span>
+                        <span class="type-value">{{
+                          cita.casa.provincia
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Municipio</span>
+                        <span class="type-value">{{
+                          cita.casa.municipio
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Localidad</span>
+                        <span class="type-value">{{
+                          cita.casa.localidad
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-2" role="tabpanel">
+                  <div class="tab-desc">
+                    <p>{{ cita.casa.description }}</p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                  <div class="tab-details">
+                    <ul class="left-table">
+                      <li>
+                        <span class="type-name">Nombre</span>
+                        <span class="type-value">{{ cita.casa.nombre }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Apellidos</span>
+                        <span class="type-value">{{
+                          cita.casa.apellidos
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Teléfono</span>
+                        <span class="type-value">{{
+                          cita.casa.numTelefonoPropietario
+                        }}</span>
+                      </li>
+                    </ul>
+                    <ul class="right-table">
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-4" role="tabpanel">
+                  <div class="tab-details">
+                    <ul class="left-table">
+                      <li>
+                        <span class="type-name">Nombre y Apellidos</span>
+                        <span class="type-value">{{ cita.user.name }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Correo</span>
+                        <span class="type-value">{{ cita.user.email }}</span>
+                      </li>
+                    </ul>
+                    <ul class="right-table">
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pd-widget">
+            <h4>Imagenes de la Propiedad</h4>
+            <ngb-carousel *ngIf="cita.casa.img && isLoadImg">
+              <ng-template *ngFor="let url of cita.casa.img" ngbSlide>
+                <div class="picsum-img-wrapper">
+                  <img [src]="url" alt="Random first slide" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Details Section End -->
+
+<ng-template #cancel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Denegar Solicitud de Cita</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p><i class="fa fa-warning custom-size"></i></p>
+
+    <b>¿Está seguro de que desea denegar la cita?</b>
+    <p>
+      Una vez que se confirme no hay vueltra atrás y no será posible
+      aprobarla.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+    <button type="button" ngbAutofocus class="site-btn inlb" (click)="denegarCita()">Denegar</button>
+  </div>
+</ng-template>
+
+<ng-template #confirm let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirmar Cita</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <p for="fecha" class="left"><b>Fecha de encuentro:</b></p>
+                <input
+                  type="date"
+                  id="fecha"
+                  name="fecha"
+                  class="form-control"
+                  (change)="onChangeFecha($event)"
+                />
+                <br>
+      </div>
+      <div class="col-md-12">
+        <p for="detallesCita" class="left"><b>Información para el encuentro:</b></p>
+
+        <textarea
+                class="form-control"
+                name="detallesCita"
+                id="detallesCita"
+                (keyup)="onChangeText($event)"
+                placeholder="Detalle los datos que considere necesario para el encuentro con el cliente."
+                rows="4"
+              ></textarea>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+    <button type="button" ngbAutofocus class="site-btn inlb" (click)="confirmarCita()">Aprobar</button>
+  </div>
+</ng-template>

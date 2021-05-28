@@ -1,3 +1,4 @@
+import { DetallesCitaComponent } from './detalles-cita/detalles-cita.component';
 import { ListadoCitasDashComponent } from './listado-citas-dash/listado-citas-dash.component';
 import { ListadoSolicitudesDashComponent } from './listado-solicitudes-dash/listado-solicitudes-dash.component';
 import { DetallesCasaComponent } from './detalles-casa/detalles-casa.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "detallescasa/:id", component: DetallesCasaComponent },
   { path: "listadosolicitudes", component: ListadoSolicitudesDashComponent },
   { path: "listadocitas", component: ListadoCitasDashComponent },
+  { path: "detallescita/:id", component: DetallesCitaComponent },
   { path: '**', redirectTo: '/dashboard' }
 ];
 
