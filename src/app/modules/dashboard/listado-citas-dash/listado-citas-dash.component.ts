@@ -1,7 +1,10 @@
+import { NotificationsToastrService } from 'src/app/services/notifications-toastr.service';
 import { CitaService } from './../../../services/cita.service';
 import { MomentService } from './../../../services/moment.service';
 import { Component, OnInit } from '@angular/core';
 import { Cita } from 'src/app/models/cita.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'src/app/models/user.model';
 declare var activee: any;
 // Declaro las variables de jQuery
 declare var jQuery: any;
@@ -17,14 +20,15 @@ export class ListadoCitasDashComponent implements OnInit {
   isDisablePrev = false;
   isDisableNext = false;
   page: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 10;
   totalPage: number = 0;
   pageArray: number[] = [];
   currentP: number[] = [];
   citas: Cita[] = [];
   citasCurrent: Cita[] = [];
   criterio:string="";
-  estado = 'No Aprobada';
+  userSol!:User;
+  estado = 'Pendiente';
   sortHeadCol: Map<string, boolean> = new Map([
     ['estado', true],
     ['fecha', true],
@@ -32,7 +36,9 @@ export class ListadoCitasDashComponent implements OnInit {
   ]);
   constructor(
     private momentService: MomentService,
-    private citaService: CitaService
+    private modalService: NgbModal,
+    private citaService: CitaService,
+    private notificationsToastrService:NotificationsToastrService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +54,7 @@ export class ListadoCitasDashComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+        this.notificationsToastrService.showError('Ha ocurrido un error cargando el listado de citas.');
       },
     });
   }
@@ -92,8 +99,9 @@ export class ListadoCitasDashComponent implements OnInit {
     const aux: Cita[] = [];
     this.citas.forEach((e) => {
       if (
-        this.parserFecha(e.fecha).includes(this.criterio) ||
-        this.parserFecha(e.createdAt).includes(this.criterio)
+        this.parserFecha(e.fecha).toLocaleLowerCase().includes(this.criterio.toLocaleLowerCase()) ||
+        e.user.name.toLocaleLowerCase().includes(this.criterio.toLocaleLowerCase()) ||
+        this.parserFecha(e.createdAt).toLocaleLowerCase().includes(this.criterio.toLocaleLowerCase())
       ) {
         aux.push(e);
       }
@@ -125,15 +133,10 @@ export class ListadoCitasDashComponent implements OnInit {
   search(event: any):void {
     this.criterio = event.target.value;
     this.change();
-    /*const aux: Cita[] = [];
-    this.citas.forEach((e) => {
-      if (
-        this.parserFecha(e.fecha).includes(this.criterio) ||
-        this.parserFecha(e.createdAt).includes(this.criterio)
-      ) {
-        aux.push(e);
-      }
-    });
-    this.citasCurrent = aux;*/
+  }
+  openModalDialogDeletePropiedad(content: any, user: User) {
+    this.userSol=user;
+    console.log(this.userSol);
+    this.modalService.open(content, { modalDialogClass: 'dark-modal' });
   }
 }

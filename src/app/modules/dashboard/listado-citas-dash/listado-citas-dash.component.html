@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="nice-select" tabindex="0" style="width: 100% !important">
-          <span class="current">No Aprobadas</span>
+          <span class="current">Pendientes</span>
           <ul class="list" style="width: 100% !important">
             <li
               data-value="Aprobada"
@@ -41,17 +41,18 @@
               Aprobadas
             </li>
             <li
-              data-value="No Aprobada"
+              data-value="Pendiente"
               class="option"
-              (click)="onSelectEstado('No Aprobada')"
+              (click)="onSelectEstado('Pendiente')"
             >
-              No Aprobadas
+            Pendientes
             </li>
           </ul>
         </div>
         <br>
 
       </div>
+
       <div class="col-md-6">
         <br>
 
@@ -75,7 +76,7 @@
               <th>No.</th>
               <th>Propiedad</th>
               <th>Solicitante</th>
-              <th id="estado" (click)="sortTable($event)">
+              <th class="point" id="estado" (click)="sortTable($event)">
                 <i
                   [ngClass]="
                     sortHeadCol.get('estado')
@@ -85,7 +86,7 @@
                 ></i>
                 Estado
               </th>
-              <th id="fecha" (click)="sortTable($event)">
+              <th class="point" id="fecha" (click)="sortTable($event)">
                 <i
                   [ngClass]="
                     sortHeadCol.get('fecha')
@@ -95,7 +96,7 @@
                 ></i>
                 Fecha
               </th>
-              <th id="createdAt" (click)="sortTable($event)">
+              <th class="point" id="createdAt" (click)="sortTable($event)">
                 <i
                   [ngClass]="
                     sortHeadCol.get('createdAt')
@@ -119,11 +120,11 @@
                     >Ver propiedad</a
                   >
                 </td>
-                <td><a href="#">Datos del Solicitante</a></td>
+                <td><a class="point" (click)="openModalDialogDeletePropiedad(content, item.user)">{{item.user.name}}</a></td>
                 <td
                   [ngClass]="
-                    item.estado == 'No Aprobada'
-                      ? 'text-danger'
+                    item.estado == 'Pendiente'
+                      ? 'text-warning'
                       : 'text-success'
                   "
                 >
@@ -133,7 +134,7 @@
                 <td>{{ parserFecha(item.createdAt) }}</td>
                 <td>
                   <a
-                    routerLink="/detallescita/{{ item._id }}"
+                    routerLink="/dashboard/detallescita/{{ item._id }}"
                     routerLinkActive="active"
                     ><i class="fa fa-search"></i
                   ></a>
@@ -165,14 +166,14 @@
               </li>
             </ng-container>
             <ng-template #elseTemplate>
-              <li class="page-item" (click)="onPrev($event)">
+              <li class="page-item point" (click)="onPrev($event)">
                 <a class="page-link">Anterior</a>
               </li>
             </ng-template>
 
             <li
               *ngFor="let item of currentP; index as i"
-              [ngClass]="item == page ? 'page-item active' : 'page-item'"
+              [ngClass]="item == page ? 'page-item active point' : 'page-item point'"
               aria-current="page"
               (click)="onSelectPage($event, item)"
             >
@@ -186,7 +187,7 @@
               </li>
             </ng-container>
             <ng-template #elseTemplate1>
-              <li class="page-item" (click)="onNext($event)">
+              <li class="page-item point" (click)="onNext($event)">
                 <a class="page-link">Siguiente</a>
               </li>
             </ng-template>
@@ -197,3 +198,49 @@
     </div>
   </div>
 </section>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Datos del Solicitante</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6">
+        <img [src]="userSol.image" alt="">
+      </div>
+      <div class="col-md-6">
+        <div>
+          <h6>Nombre:</h6>
+          <p>{{userSol.name}}</p>
+        </div>
+        <div>
+          <h6>Email:</h6>
+          <p>{{userSol.email}}</p>
+        </div>
+        <hr>
+        <div>
+          <h6>Registrado:</h6>
+          <p class="text-success">{{parserFecha(userSol.createdAt) }}</p>
+        </div>
+        <div>
+          <h6>Actualizado:</h6>
+          <p class="text-success">{{parserFecha(userSol.updatedAt) }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cerrar</a>
+
+  </div>
+
+</ng-template>
