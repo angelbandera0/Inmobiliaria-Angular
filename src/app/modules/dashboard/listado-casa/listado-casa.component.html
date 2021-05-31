@@ -229,7 +229,7 @@
     <div *ngIf="listadoCasas" class="row">
       <div *ngFor="let casa of listadoCasas" class="col-lg-4 col-md-6">
 
-      <app-card  [casa]="casa" [user]="user" (deleteRequest)="loadListado()"></app-card>
+      <app-card  [casa]="casa" [user]="user" (deleteRequest)="loadListado()" (ventaRequest)="loadListado()"></app-card>
       </div>
 
 
