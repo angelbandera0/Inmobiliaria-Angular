@@ -1,0 +1,304 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Detalles de la Solicitud de Publicación de Propiedad</h4>
+          <div class="bt-option">
+            <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
+            <span>Detalles de la Solicitud de Publicación de Propiedad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<section *ngIf="solicitud" class="property-section spad non-pad-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h4>Información de la Solicitud de Publicación de Propiedad</h4>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <button
+          type="submit"
+          class="site-btn alig"
+          (click)="openModalDialogConfirm(confirm)"
+        >
+          Aprobar
+        </button>
+      </div>
+      <div class="col-lg-2">
+        <button
+          type="submit"
+          class="site-btn color-red alig"
+          (click)="openModalDialogCancel(cancel)"
+        >
+          Denegar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Property Details Section Begin -->
+<section class="property-details-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="pd-text">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="pd-title">
+                <div class="pt-price">{{ solicitud.precio }} CUP</div>
+                <h3>{{ solicitud.title }}</h3>
+                <p>
+                  <span class="icon_pin_alt"></span> {{ solicitud.provincia }},
+                  {{ solicitud.municipio }}, {{ solicitud.localidad }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="pd-board">
+            <div class="tab-board">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-toggle="tab"
+                    href="#tabs-1"
+                    role="tab"
+                    >Información General</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#tabs-2"
+                    role="tab"
+                    >Descripción</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#tabs-3"
+                    role="tab"
+                    >Datos del Propietario</a
+                  >
+                </li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                  <div class="tab-details">
+                    <ul class="left-table">
+                      <li>
+                        <span class="type-name">Tipo de Propiedad</span>
+                        <span class="type-value">{{ solicitud.tipoPropiedad }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Precio</span>
+                        <span class="type-value">{{ solicitud.precio }} <b>CUP</b></span>
+                      </li>
+                      <li>
+                        <span class="type-name">Baños</span>
+                        <span class="type-value">{{ solicitud.cantBannos }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Cuartos</span>
+                        <span class="type-value">{{ solicitud.cantCuartos }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Garaje?</span>
+                        <span class="type-value">{{
+                          solicitud.tieneGaraje ? "Si" : "No"
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Patio?</span>
+                        <span class="type-value">{{
+                          solicitud.tienePatio ? "Si" : "No"
+                        }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">¿Tiene Carpoch?</span>
+                        <span class="type-value">{{
+                          solicitud.tieneCarpoch ? "Si" : "No"
+                        }}</span>
+                      </li>
+                    </ul>
+                    <ul class="right-table">
+                      <li>
+                        <span class="type-name">Provincia</span>
+                        <span class="type-value">{{ solicitud.provincia }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Municipio</span>
+                        <span class="type-value">{{ solicitud.municipio }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Localidad</span>
+                        <span class="type-value">{{ solicitud.localidad }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-2" role="tabpanel">
+                  <div class="tab-desc">
+                    <p>{{ solicitud.description }}</p>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tabs-3" role="tabpanel">
+                  <div class="tab-details">
+                    <ul class="left-table">
+                      <li>
+                        <span class="type-name">Nombre</span>
+                        <span class="type-value">{{ solicitud.nombre }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Apellidos</span>
+                        <span class="type-value">{{ solicitud.apellidos }}</span>
+                      </li>
+                      <li>
+                        <span class="type-name">Teléfono</span>
+                        <span class="type-value">{{
+                          solicitud.numTelefonoPropietario
+                        }}</span>
+                      </li>
+                    </ul>
+                    <ul class="right-table">
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                      <li>
+                        <span class="type-name"></span>
+                        <span class="type-value"></span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pd-widget">
+            <h4>Imagenes de la Propiedad</h4>
+            <ngb-carousel *ngIf="solicitud.img && isLoadImg">
+              <ng-template *ngFor="let url of solicitud.img" ngbSlide>
+                <div class="picsum-img-wrapper">
+                  <img [src]="url" alt="Random first slide" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Details Section End -->
+
+<ng-template #cancel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Denegar Solicitud de Publicación de Propiedad</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p><i class="fa fa-warning custom-size"></i></p>
+
+    <b>¿Está seguro de que desea denegar la solicitud?</b>
+    <p>
+      Una vez que se confirme no hay vueltra atrás y no será posible
+      aprobarla.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+    <button type="button" ngbAutofocus class="site-btn inlb" (click)="denegarSolicitud()" >Denegar</button>
+  </div>
+</ng-template>
+
+<ng-template #confirm let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Confirmar Solicitud de Publicación de Propiedad</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <p for="fecha" class="left"><b>Fecha de encuentro:</b></p>
+                <input
+                  type="date"
+                  id="fecha"
+                  name="fecha"
+                  class="form-control"
+
+                />
+                <br>
+      </div>
+      <div class="col-md-12">
+        <p for="detallesCita" class="left"><b>Información para el encuentro:</b></p>
+
+        <textarea
+                class="form-control"
+                name="detallesCita"
+                id="detallesCita"
+                placeholder="Detalle los datos que considere necesario para el encuentro con el cliente."
+                rows="4"
+              ></textarea>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+    <button type="button" (click)="aprobar()" ngbAutofocus class="site-btn inlb" >Aprobar</button>
+  </div>
+</ng-template>
