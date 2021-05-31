@@ -8,6 +8,7 @@ import { AcercaComponent } from './acerca/acerca.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ListadoCasaCmsComponent } from './listado-casa-cms/listado-casa-cms.component';
 import { DetallesCasaCmsComponent } from './detalles-casa-cms/detalles-casa-cms.component';
+import { UserGuard } from 'src/app/guards/user.guard';
 
 const routes: Routes = [
   { path: '', component: ShopComponent },
@@ -15,14 +16,14 @@ const routes: Routes = [
   { path: 'contactos', component: ContactoComponent },
   { path: 'listadocasa', component: ListadoCasaCmsComponent },
   { path: 'detallescasa/:id', component: DetallesCasaCmsComponent },
-  { path: 'detallesuser/:id', component: DetallesUserComponent },
-  { path: 'addsolicitud', component:AddSolicitudCmsComponent},
-  { path: 'listadosolicitud', component:ListadoSolicitudesComponent}
-
+  { path: 'detallesuser/:id', component: DetallesUserComponent, canActivate:[UserGuard] },
+  { path: 'addsolicitud', component: AddSolicitudCmsComponent, canActivate:[UserGuard] },
+  { path: 'listadosolicitud', component: ListadoSolicitudesComponent },
+  //{ path: '**', redirectTo: '/error/404' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CmsRoutingModule { }
+export class CmsRoutingModule {}

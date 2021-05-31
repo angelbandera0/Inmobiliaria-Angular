@@ -16,6 +16,8 @@ import { SearchComponent } from './listado-casa/search/search.component';
 import { ListadoSolicitudesDashComponent } from './listado-solicitudes-dash/listado-solicitudes-dash.component';
 import { ListadoCitasDashComponent } from './listado-citas-dash/listado-citas-dash.component';
 import { DetallesCitaComponent } from './detalles-cita/detalles-cita.component';
+import { DetallesSolicitudDashComponent } from './detalles-solicitud-dash/detalles-solicitud-dash.component';
+import { ListadoVentasDashComponent } from './listado-ventas-dash/listado-ventas-dash.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { DetallesCitaComponent } from './detalles-cita/detalles-cita.component';
     SearchComponent,
     ListadoSolicitudesDashComponent,
     ListadoCitasDashComponent,
-    DetallesCitaComponent
+    DetallesCitaComponent,
+    DetallesSolicitudDashComponent,
+    ListadoVentasDashComponent
   ],
   imports: [
     CommonModule,

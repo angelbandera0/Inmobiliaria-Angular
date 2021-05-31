@@ -30,6 +30,7 @@ import { EditarUserComponent } from './editar-user/editar-user.component';
     DetallesUserComponent,
     ListadoSolicitudesComponent,
     EditarUserComponent,
+
   ],
   imports: [
     CommonModule,
