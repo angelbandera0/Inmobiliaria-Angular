@@ -20,8 +20,8 @@ export class DetallesCitaComponent implements OnInit {
   id!: string;
   cita!: Cita;
   isLoadImg = false;
-  fecha!:string;
-  text!:string;
+  fecha!: string;
+  text!: string;
   formData: FormData = new FormData();
 
   constructor(
@@ -35,7 +35,7 @@ export class DetallesCitaComponent implements OnInit {
 
   ngOnInit(): void {
     activee($);
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params.id;
     this.getCitaById();
   }
   parserFecha(fecha: any): string {
@@ -52,25 +52,27 @@ export class DetallesCitaComponent implements OnInit {
       },
       error: (res) => {
         console.log(res);
-        this.notificationsToastrService.showError('Ha ocurrido un error en cargar los datos de la cita.');
+        this.notificationsToastrService.showError(
+          'Ha ocurrido un error en cargar los datos de la cita.'
+        );
       },
     });
   }
-  openModalDialogConfirm(content: any) {
+  openModalDialogConfirm(content: any): void {
     this.modalService.open(content, { modalDialogClass: 'dark-modal' });
   }
-  openModalDialogCancel(content: any) {
+  openModalDialogCancel(content: any): void {
     this.modalService.open(content, { modalDialogClass: 'dark-modal' });
   }
-  onChangeFecha(event: any) {
+  onChangeFecha(event: any): void {
     console.log(event);
-    this.fecha=event.target.value;
+    this.fecha = event.target.value;
   }
-  onChangeText(event: any) {
+  onChangeText(event: any): void {
     console.log(event);
-    this.text=event.target.value;
+    this.text = event.target.value;
   }
-  confirmarCita() {
+  confirmarCita(): void {
     this.formData.delete('subject');
     this.formData.append('subject', 'Confirmación de la aprobación de la cita');
 
@@ -78,7 +80,12 @@ export class DetallesCitaComponent implements OnInit {
     this.formData.append('fecha', this.fecha);
 
     this.formData.delete('text');
-    this.formData.append('text',`Su cita ha sido aprobada y concertada para el ${this.parserFecha(this.fecha)}. Los datos de la cita son: ${this.text}`);
+    this.formData.append(
+      'text',
+      `Su cita ha sido aprobada y concertada para el ${this.parserFecha(
+        this.fecha
+      )}. Los datos de la cita son: ${this.text}`
+    );
 
     this.citaService.aprobarCita(this.id, this.formData).subscribe({
       next: (res) => {
@@ -88,7 +95,6 @@ export class DetallesCitaComponent implements OnInit {
         this.notificationsToastrService.showSuccess(
           'La cita se aprobó correctamente.'
         );
-
       },
       error: (res) => {
         console.log(res);
@@ -100,7 +106,7 @@ export class DetallesCitaComponent implements OnInit {
     });
   }
 
-  denegarCita(): void{
+  denegarCita(): void {
     this.citaService.deleteCita(this.id).subscribe({
       next: (res) => {
         console.log(res);
@@ -109,7 +115,6 @@ export class DetallesCitaComponent implements OnInit {
           'La cita se denegó correctamente.'
         );
         this.router.navigate(['/dashboard/listadocitas']);
-
       },
       error: (res) => {
         console.log(res);
