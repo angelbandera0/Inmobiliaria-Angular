@@ -89,22 +89,28 @@
           <nav class="nav-menu">
             <ul>
               <li>
-                <a href="#">Propiedades</a>
+                <a >Propiedades</a>
                 <ul class="dropdown">
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/addcasa" routerLinkActive="active">Registrar Propiedad</a></li>
                 </ul>
               </li>
               <li>
-                <a href="#">Solicitudes</a>
+                <a >Solicitudes</a>
                 <ul class="dropdown">
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/listadosolicitudes" routerLinkActive="active">Listado de Solicitudes</a></li>
                 </ul>
               </li>
               <li>
-                <a href="#">Citas</a>
+                <a >Citas</a>
                 <ul class="dropdown">
                   <li *ngIf="isAdmin"><a routerLink="/dashboard/listadocitas" routerLinkActive="active">Listado de Citas</a></li>
+                </ul>
+              </li>
+              <li>
+                <a >Ventas</a>
+                <ul class="dropdown">
+                  <li *ngIf="isAdmin"><a routerLink="/dashboard/listadoventas" routerLinkActive="active">Listado de Ventas</a></li>
                 </ul>
               </li>
               <li *ngIf="!isAdmin"><a routerLink="/dashboard/contactos" routerLinkActive="active">Contactos</a></li>
