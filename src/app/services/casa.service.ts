@@ -62,4 +62,12 @@ export class CasaService {
       params,
     });
   }
+
+  venderCasa(id: string, data: FormData): Observable<any> {
+    return this.http.post<any>(
+      `${environment.server}/casa/venta/${id}`,
+      data,
+      this.httpOptions
+    );
+  }
 }
