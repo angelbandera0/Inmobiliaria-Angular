@@ -24,7 +24,8 @@ export class Casa {
   tienePatio: boolean;
   tieneGaraje: boolean;
   tieneCarpoch: boolean;
-  like?: Like ;
+  vendida: boolean;
+  like?: Like;
 
   constructor(
     _id?: string,
@@ -48,7 +49,8 @@ export class Casa {
     cantCuartos?: number,
     tienePatio?: boolean,
     tieneGaraje?: boolean,
-    tieneCarpoch?: boolean
+    tieneCarpoch?: boolean,
+    vendida?: boolean
   ) {
     this._id = _id as string;
     this.title = title as string;
@@ -72,5 +74,6 @@ export class Casa {
     this.tienePatio = tienePatio as boolean;
     this.tieneGaraje = tieneGaraje as boolean;
     this.tieneCarpoch = tieneCarpoch as boolean;
+    this.vendida = vendida as boolean;
   }
 }
