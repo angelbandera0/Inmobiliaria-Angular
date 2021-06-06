@@ -1,0 +1,20 @@
+.separacion{
+  padding-bottom: 3rem;
+}
+a:hover{
+  cursor: pointer;
+  color: #00C89E !important;
+}
+
+a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size .3s;
+}
+
+a:hover, a:focus {
+  background-size: 100% 2px;
+}
