@@ -1,12 +1,14 @@
 <div class="property-item">
   <div
     class="pi-pic set-bg"
+    routerLink="/dashboard/detallescasa/{{ casa._id }}"
+        routerLinkActive="active"
     [ngStyle]="{ 'background-image': 'url(' + casa.img[0] + ')' }"
   >
     <div class="label c-magenta">
       <a
-        routerLink="/dashboard/detallescasa/{{ casa._id }}"
-        routerLinkActive="active"
+      routerLink="/dashboard/detallescasa/{{ casa._id }}"
+      routerLinkActive="active"
         ><i class="fa fa-search fa-custom"></i
       ></a>
     </div>

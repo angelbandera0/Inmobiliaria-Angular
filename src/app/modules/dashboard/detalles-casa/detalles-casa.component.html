@@ -1,40 +1,31 @@
-<!-- Property Details Section Begin -->
-<section class="property-details-section">
-  <div class="property-pic-slider owl-carousel">
-    <div class="ps-item">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-lg-12 p-0">
-                <ng-container *ngIf="casa.img.length != 0; else elseTemplate">
-                  <div
-                    class="ps-item-inner large-item set-bg"
-                    [ngStyle]="{
-                      'background-image': 'url(' + casa.img[0] + ')'
-                    }"
-                    data-setbg="./assets/img/property/slider/ps-1.jpg"
-                  ></div>
-                </ng-container>
-                <ng-template #elseTemplate>
-                  <div
-                    class="ps-item-inner large-item set-bg"
-                    [ngStyle]="{
-                      'background-image':
-                        'url(' + './assets/img/no-image.jpg' + ')'
-                    }"
-                    data-setbg="./assets/img/property/slider/ps-1.jpg"
-                  ></div>
-                </ng-template>
-              </div>
-            </div>
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Detalles de la Propiedad</h4>
+          <div class="bt-option">
+            <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
+            <span>Detalles de la Propiedad</span>
           </div>
         </div>
       </div>
     </div>
   </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Property Details Section Begin -->
+<section  class="property-details-section spad non-pad-bottom">
   <div class="container">
     <div class="row">
+      <div class="col-lg-12">
+        <app-pagina-anterior></app-pagina-anterior>
+      </div>
       <div class="col-lg-12">
         <div class="pd-text">
           <div class="row">

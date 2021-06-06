@@ -57,6 +57,8 @@ export class ListadoCasaCmsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     activee($);
+    this.formData.delete('vendida');
+    this.formData.append('vendida',`${false}`);
     const id = this.tokenStorageService.getId();
     this.userService.userById(id ? id : 'none').subscribe({
       next: (res) => {

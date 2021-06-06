@@ -60,7 +60,7 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
 
- // { path: '**', redirectTo: '/error/404' },
+  // { path: '**', redirectTo: '/error/404' },
 ];
 
 @NgModule({

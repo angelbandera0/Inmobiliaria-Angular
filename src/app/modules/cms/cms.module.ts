@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetallesUserComponent } from './detalles-user/detalles-user.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { EditarUserComponent } from './editar-user/editar-user.component';
+import { DetallesSolicitudCmsComponent } from './detalles-solicitud-cms/detalles-solicitud-cms.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -30,10 +32,12 @@ import { EditarUserComponent } from './editar-user/editar-user.component';
     DetallesUserComponent,
     ListadoSolicitudesComponent,
     EditarUserComponent,
+    DetallesSolicitudCmsComponent,
 
   ],
   imports: [
     CommonModule,
+    SharedModule,
     CmsRoutingModule,
     NgbCarouselModule,
     FormsModule,

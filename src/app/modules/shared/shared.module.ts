@@ -6,6 +6,7 @@ import { FooterComponent } from './cms/footer/footer.component';
 import { HeaderDashComponent } from './dashboard/header-dash/header-dash.component';
 import { FooterDashComponent } from './dashboard/footer-dash/footer-dash.component';
 import { PaginationComponent } from './comun/pagination/pagination.component';
+import { PaginaAnteriorComponent } from './comun/pagina-anterior/pagina-anterior.component';
 
 
 
@@ -16,6 +17,7 @@ import { PaginationComponent } from './comun/pagination/pagination.component';
     HeaderDashComponent,
     FooterDashComponent,
     PaginationComponent,
+    PaginaAnteriorComponent,
 
   ],
   exports: [
@@ -24,6 +26,8 @@ import { PaginationComponent } from './comun/pagination/pagination.component';
     HeaderDashComponent,
     FooterDashComponent,
     PaginationComponent,
+    PaginaAnteriorComponent,
+
     ],
   imports: [
     CommonModule,SharedRoutingModule

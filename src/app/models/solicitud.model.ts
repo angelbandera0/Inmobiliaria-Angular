@@ -26,6 +26,7 @@ export class Solicitud {
   tieneCarpoch: boolean;
   like?: Like;
   estado?: string;
+  leida?: boolean;
 
   constructor(
     _id?: string,
@@ -50,7 +51,8 @@ export class Solicitud {
     tienePatio?: boolean,
     tieneGaraje?: boolean,
     tieneCarpoch?: boolean,
-    estado?: string
+    estado?: string,
+    leida?: boolean
   ) {
     this._id = _id as string;
     this.title = title as string;
@@ -74,6 +76,7 @@ export class Solicitud {
     this.tienePatio = tienePatio as boolean;
     this.tieneGaraje = tieneGaraje as boolean;
     this.tieneCarpoch = tieneCarpoch as boolean;
-    this.estado = estado;
+    this.estado = estado as string;
+    this.leida = leida as boolean;
   }
 }

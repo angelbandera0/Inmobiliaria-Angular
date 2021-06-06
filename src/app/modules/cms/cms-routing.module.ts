@@ -1,3 +1,4 @@
+import { DetallesSolicitudCmsComponent } from './detalles-solicitud-cms/detalles-solicitud-cms.component';
 import { DetallesUserComponent } from './detalles-user/detalles-user.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { AddSolicitudCmsComponent } from './add-solicitud-cms/add-solicitud-cms.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'detallesuser/:id', component: DetallesUserComponent, canActivate:[UserGuard] },
   { path: 'addsolicitud', component: AddSolicitudCmsComponent, canActivate:[UserGuard] },
   { path: 'listadosolicitud', component: ListadoSolicitudesComponent },
+  { path: 'detallessolicitud/:id', component: DetallesSolicitudCmsComponent, canActivate:[UserGuard] },
   //{ path: '**', redirectTo: '/error/404' },
 ];
 

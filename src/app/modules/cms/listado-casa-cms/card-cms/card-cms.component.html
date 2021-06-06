@@ -2,6 +2,8 @@
   <div class="property-item">
     <div
       class="pi-pic set-bg"
+      routerLink="/detallescasa/{{ casa._id }}"
+          routerLinkActive="active"
       [ngStyle]="{ 'background-image': 'url(' + casa.img[0] + ')' }"
     >
 
@@ -35,7 +37,8 @@
     </div>
     <div class="pt-price">{{ casa.precio }}</div>
       <h5>
-        <a href="#">{{ casa.title }}</a>
+        <a routerLink="/detallescasa/{{ casa._id }}"
+        routerLinkActive="active">{{ casa.title }}</a>
       </h5>
       <p>
         <span class="icon_pin_alt"></span>{{ casa.provincia }},

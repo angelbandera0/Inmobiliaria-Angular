@@ -7,10 +7,10 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb-text">
-          <h4>Detalles de la Cita</h4>
+          <h4>Detalles de la Solicitud de Publicación de Propiedad</h4>
           <div class="bt-option">
             <a href="./index.html"><i class="fa fa-home"></i> Inicio</a>
-            <span>Detalles de la Cita</span>
+            <span>Detalles de la Solicitud de Publicación de Propiedad</span>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
 </section>
 <!-- Breadcrumb Section End -->
 
-<section *ngIf="cita" class="property-section spad non-pad-bottom">
+<section *ngIf="solicitud" class="property-section spad non-pad-bottom">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -27,7 +27,7 @@
       </div>
       <div class="col-lg-8">
         <div class="section-title">
-          <h4>Información de la Cita</h4>
+          <h4>Información de la Solicitud de Publicación</h4>
         </div>
       </div>
       <div class="col-lg-2">
@@ -49,61 +49,28 @@
         </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>Estado de aprobación:</h5>
-        <p
-          [ngClass]="
-            cita.estado == 'Pendiente' ? 'text-warning' : 'text-success'
-          "
-        >
-          <b>{{ cita.estado }}</b>
-        </p>
-        <br />
-      </div>
-      <div class="col-md-12">
-        <h5>Información:</h5>
-        <ng-container *ngIf="cita.detallesCita; else elseTemplate">
-          <p>{{ cita.detallesCita }}</p>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <p>No se han brindado detalles sobre las cita.</p>
-          <br />
-        </ng-template>
-        <br />
-      </div>
-      <div class="col-md-12">
-        <h5>Fecha de encuentro:</h5>
-        <ng-container *ngIf="cita.fecha; else elseTemplate">
-          <p>{{ parserFecha(cita.fecha) }}</p>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <p>No se ha establecido una fecha aún.</p>
-        </ng-template>
-        <br />
-      </div>
-      <div class="col-md-12">
-        <h5>Fecha de registro:</h5>
-        <p>{{ parserFecha(cita.createdAt) }}</p>
-      </div>
-      <div class="col-md-12">
-        <hr />
-      </div>
-    </div>
+
   </div>
 </section>
+
 <!-- Property Details Section Begin -->
-<section *ngIf="cita" class="property-details-section">
-  <div *ngIf="cita" class="container">
+<section class="property-details-section">
+  <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div class="pd-text">
-          <div class="row titleP">
-            <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-8">
               <div class="pd-title">
-                <h4><b>Datos Asociados</b></h4>
+                <div class="pt-price">{{ solicitud.precio }} CUP</div>
+                <h3>{{ solicitud.title }}</h3>
+                <p>
+                  <span class="icon_pin_alt"></span> {{ solicitud.provincia }},
+                  {{ solicitud.municipio }}, {{ solicitud.localidad }}
+                </p>
               </div>
             </div>
+
           </div>
           <div class="pd-board">
             <div class="tab-board">
@@ -135,15 +102,6 @@
                     >Datos del Propietario</a
                   >
                 </li>
-                <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    data-toggle="tab"
-                    href="#tabs-4"
-                    role="tab"
-                    >Usuario Solicitante</a
-                  >
-                </li>
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
@@ -152,65 +110,51 @@
                     <ul class="left-table">
                       <li>
                         <span class="type-name">Tipo de Propiedad</span>
-                        <span class="type-value">{{
-                          cita.casa.tipoPropiedad
-                        }}</span>
+                        <span class="type-value">{{ solicitud.tipoPropiedad }}</span>
                       </li>
                       <li>
                         <span class="type-name">Precio</span>
-                        <span class="type-value"
-                          >{{ cita.casa.precio }} CUP</span
-                        >
+                        <span class="type-value">{{ solicitud.precio }} <b>CUP</b></span>
                       </li>
                       <li>
                         <span class="type-name">Baños</span>
-                        <span class="type-value">{{
-                          cita.casa.cantBannos
-                        }}</span>
+                        <span class="type-value">{{ solicitud.cantBannos }}</span>
                       </li>
                       <li>
                         <span class="type-name">Cuartos</span>
-                        <span class="type-value">{{
-                          cita.casa.cantCuartos
-                        }}</span>
+                        <span class="type-value">{{ solicitud.cantCuartos }}</span>
                       </li>
                       <li>
                         <span class="type-name">¿Tiene Garaje?</span>
                         <span class="type-value">{{
-                          cita.casa.tieneGaraje ? "Si" : "No"
+                          solicitud.tieneGaraje ? "Si" : "No"
                         }}</span>
                       </li>
                       <li>
                         <span class="type-name">¿Tiene Patio?</span>
                         <span class="type-value">{{
-                          cita.casa.tienePatio ? "Si" : "No"
+                          solicitud.tienePatio ? "Si" : "No"
                         }}</span>
                       </li>
                       <li>
                         <span class="type-name">¿Tiene Carpoch?</span>
                         <span class="type-value">{{
-                          cita.casa.tieneCarpoch ? "Si" : "No"
+                          solicitud.tieneCarpoch ? "Si" : "No"
                         }}</span>
                       </li>
                     </ul>
                     <ul class="right-table">
                       <li>
                         <span class="type-name">Provincia</span>
-                        <span class="type-value">{{
-                          cita.casa.provincia
-                        }}</span>
+                        <span class="type-value">{{ solicitud.provincia }}</span>
                       </li>
                       <li>
                         <span class="type-name">Municipio</span>
-                        <span class="type-value">{{
-                          cita.casa.municipio
-                        }}</span>
+                        <span class="type-value">{{ solicitud.municipio }}</span>
                       </li>
                       <li>
                         <span class="type-name">Localidad</span>
-                        <span class="type-value">{{
-                          cita.casa.localidad
-                        }}</span>
+                        <span class="type-value">{{ solicitud.localidad }}</span>
                       </li>
                       <li>
                         <span class="type-name"></span>
@@ -233,7 +177,7 @@
                 </div>
                 <div class="tab-pane" id="tabs-2" role="tabpanel">
                   <div class="tab-desc">
-                    <p>{{ cita.casa.description }}</p>
+                    <p>{{ solicitud.description }}</p>
                   </div>
                 </div>
                 <div class="tab-pane" id="tabs-3" role="tabpanel">
@@ -241,18 +185,16 @@
                     <ul class="left-table">
                       <li>
                         <span class="type-name">Nombre</span>
-                        <span class="type-value">{{ cita.casa.nombre }}</span>
+                        <span class="type-value">{{ solicitud.nombre }}</span>
                       </li>
                       <li>
                         <span class="type-name">Apellidos</span>
-                        <span class="type-value">{{
-                          cita.casa.apellidos
-                        }}</span>
+                        <span class="type-value">{{ solicitud.apellidos }}</span>
                       </li>
                       <li>
                         <span class="type-name">Teléfono</span>
                         <span class="type-value">{{
-                          cita.casa.numTelefonoPropietario
+                          solicitud.numTelefonoPropietario
                         }}</span>
                       </li>
                     </ul>
@@ -261,30 +203,6 @@
                         <span class="type-name"></span>
                         <span class="type-value"></span>
                       </li>
-                      <li>
-                        <span class="type-name"></span>
-                        <span class="type-value"></span>
-                      </li>
-                      <li>
-                        <span class="type-name"></span>
-                        <span class="type-value"></span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="tab-pane" id="tabs-4" role="tabpanel">
-                  <div class="tab-details">
-                    <ul class="left-table">
-                      <li>
-                        <span class="type-name">Nombre y Apellidos</span>
-                        <span class="type-value">{{ cita.user.name }}</span>
-                      </li>
-                      <li>
-                        <span class="type-name">Correo</span>
-                        <span class="type-value">{{ cita.user.email }}</span>
-                      </li>
-                    </ul>
-                    <ul class="right-table">
                       <li>
                         <span class="type-name"></span>
                         <span class="type-value"></span>
@@ -301,8 +219,8 @@
           </div>
           <div class="pd-widget">
             <h4>Imagenes de la Propiedad</h4>
-            <ngb-carousel *ngIf="cita.casa.img && isLoadImg">
-              <ng-template *ngFor="let url of cita.casa.img" ngbSlide>
+            <ngb-carousel *ngIf="solicitud.img && isLoadImg">
+              <ng-template *ngFor="let url of solicitud.img" ngbSlide>
                 <div class="picsum-img-wrapper">
                   <img [src]="url" alt="Random first slide" />
                 </div>
@@ -318,7 +236,7 @@
 
 <ng-template #cancel let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Denegar Solicitud de Cita</h5>
+    <h5 class="modal-title">Denegar Solicitud de Publicación de Propiedad</h5>
     <button
       type="button"
       class="close"
@@ -331,7 +249,7 @@
   <div class="modal-body text-center">
     <p><i class="fa fa-warning custom-size"></i></p>
 
-    <b>¿Está seguro de que desea denegar la cita?</b>
+    <b>¿Está seguro de que desea denegar la solicitud?</b>
     <p>
       Una vez que se confirme no hay vueltra atrás y no será posible
       aprobarla.
@@ -339,13 +257,13 @@
   </div>
   <div class="modal-footer">
     <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
-    <button type="button" ngbAutofocus class="site-btn inlb" (click)="denegarCita()">Denegar</button>
+    <button type="button" ngbAutofocus class="site-btn inlb" (click)="denegarSolicitud()" >Denegar</button>
   </div>
 </ng-template>
 
 <ng-template #confirm let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Confirmar Cita</h5>
+    <h5 class="modal-title">Confirmar Solicitud de Publicación de Propiedad</h5>
     <button
       type="button"
       class="close"
@@ -364,7 +282,7 @@
                   id="fecha"
                   name="fecha"
                   class="form-control"
-                  (change)="onChangeFecha($event)"
+
                 />
                 <br>
       </div>
@@ -375,7 +293,6 @@
                 class="form-control"
                 name="detallesCita"
                 id="detallesCita"
-                (keyup)="onChangeText($event)"
                 placeholder="Detalle los datos que considere necesario para el encuentro con el cliente."
                 rows="4"
               ></textarea>
@@ -385,6 +302,6 @@
   </div>
   <div class="modal-footer">
     <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
-    <button type="button" ngbAutofocus class="site-btn inlb" (click)="confirmarCita()">Aprobar</button>
+    <button type="button" (click)="aprobar()" ngbAutofocus class="site-btn inlb" >Aprobar</button>
   </div>
 </ng-template>

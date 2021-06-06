@@ -18,6 +18,7 @@ import { ListadoCitasDashComponent } from './listado-citas-dash/listado-citas-da
 import { DetallesCitaComponent } from './detalles-cita/detalles-cita.component';
 import { DetallesSolicitudDashComponent } from './detalles-solicitud-dash/detalles-solicitud-dash.component';
 import { ListadoVentasDashComponent } from './listado-ventas-dash/listado-ventas-dash.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ListadoVentasDashComponent } from './listado-ventas-dash/listado-ventas
   ],
   imports: [
     CommonModule,
+    SharedModule,
     NgbCarouselModule,
     DashboardRoutingModule,FormsModule,ReactiveFormsModule
   ],schemas:[CUSTOM_ELEMENTS_SCHEMA]
