@@ -1,0 +1,476 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+<div class="container">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="breadcrumb-text">
+      <h4>Editar Solicitud de Publicación</h4>
+      <div class="bt-option">
+        <a routerLink="/dashboard" routerLinkActive="active"><i class="fa fa-home"></i> Inicio</a>
+        <span>Editar Solicitud de Publicación</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Property Submit Section Begin -->
+<section class="property-submit-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <app-pagina-anterior></app-pagina-anterior>
+      </div>
+      <div class="col-lg-12">
+        <div class="property-submit-form">
+          <form [formGroup]="solicitudForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="pf-title">
+              <h4>Título</h4>
+              <input
+              type="text"
+              name="title"
+              formControlName="title"
+              id="title"
+              placeholder="Título del anucio de la propiedad"
+                  class="form-control"
+                  required
+                  autofocus
+                />
+
+              <div
+                  *ngIf="
+                    getControl.title.touched && getControl.title.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.title.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+            </div>
+            <div class="pf-location">
+              <h4>Datos del propietario</h4>
+              <div class="row">
+                <div class="col-md-6 margin-b">
+                  <input
+                    type="text"
+                    name="nombre"
+                    formControlName="nombre"
+                    id="nombre"
+                    placeholder="Nombre del propietario"
+                  autofocus
+                  />
+                </div>
+                <div class="col-md-6 margin-b">
+                  <input
+                    type="text"
+                    name="apellidos"
+                    formControlName="apellidos"
+                    id="apellidos"
+                    placeholder="Apellidos del propietario"
+                  autofocus
+                  />
+                </div>
+
+                <div class="col-md-12">
+                  <input
+                    type="text"
+                    name="numTelefonoPropietario"
+                    formControlName="numTelefonoPropietario"
+                    id="numTelefonoPropietario"
+                    placeholder="Teléfono de contacto con el propietario"
+                    autofocus
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="pf-location">
+              <h4>Localización de la Propiedad</h4>
+              <div class="row">
+                <div class="col-md-6 margin-b">
+                  <div
+                    class="nice-select"
+                    tabindex="0"
+                    style="width: 100% !important"
+                  >
+                    <span class="current">{{ currentP }}</span>
+                    <ul class="list" style="width: 100% !important">
+                      <li
+                        *ngFor="
+                          let lp of listadoProvincias;
+                          index as i;
+                          first as isFirst
+                        "
+                        data-value="lp.id"
+                        class="option"
+                        (click)="onselectProvincia($event, lp.id)"
+                      >
+                        {{ lp.nombre }}
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                  *ngIf="
+                    currentP=='Provincia'
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="currentP=='Provincia'">
+                    Debe escoger una Provincia.
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-6 margin-b">
+                  <div
+                    class="nice-select"
+                    tabindex="0"
+                    style="width: 100% !important"
+                  >
+                    <span class="current">{{ currentM }}</span>
+                    <ul class="list" style="width: 100% !important">
+                      <li
+                        *ngFor="
+                          let lm of listadoMunicipios;
+                          index as i;
+                          first as isFirst
+                        "
+                        data-value="lm"
+                        class="option"
+                        (click)="onselectMunicipio($event, lm)"
+                      >
+                        {{ lm }}
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                  *ngIf="
+                    currentM=='Municipio'
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="currentM=='Municipio'">
+                    Debe escoger un municipio.
+                  </div>
+                </div>
+                </div>
+
+                <div class="col-md-12">
+                  <input
+                    type="text"
+                    name="localidad"
+                    formControlName="localidad"
+                    id="localidad"
+                    placeholder="Localidad"
+                    required
+                  autofocus
+                  />
+                  <div
+                  *ngIf="
+                    getControl.localidad.touched && getControl.localidad.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.localidad.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pf-type">
+              <h4>Tipo de Propiedad</h4>
+              <div class="type-item row">
+                <div class="col-md-3">
+                <label for="apartamento"
+                  >Apartmento
+                  <input
+                    type="checkbox"
+                    name="apartamento"
+                    formControlName="apartamento"
+                    id="apartamento"
+                    (change)='onSelectCheck($event,0)'
+                  />
+                  <span class="checkbox"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label for="casaindependiente"
+                  >Casa Independiente
+                  <input
+                    type="checkbox"
+                    name="casaindependiente"
+                    formControlName="casaindependiente"
+                    id="casaindependiente"
+                    (change)='onSelectCheck($event,1)'
+                  />
+                  <span class="checkbox"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label for="casasemiindependiente"
+                  >Casa Semiindependiente
+                  <input
+                    type="checkbox"
+                    name="casasemiindependiente"
+                    formControlName="casasemiindependiente"
+                    id="casasemiindependiente"
+                    (change)='onSelectCheck($event,2)'
+                  />
+                  <span class="checkbox"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label for="biplanta"
+                  >Biplanta
+                  <input
+                    type="checkbox"
+                    name="biplanta"
+                    formControlName="biplanta"
+                    id="biplanta"
+                    (change)='onSelectCheck($event,3)'
+                  />
+                  <span class="checkbox"></span>
+                </label>
+                </div>
+                <div class="col-md-3">
+                  <label for="otro"
+                    >Otro Tipo
+                    <input
+                      type="checkbox"
+                      name="otro"
+                      formControlName="otro"
+                      id="otro"
+                      (change)='onSelectCheck($event,4)'
+                    />
+                    <span class="checkbox"></span>
+                  </label>
+                  </div>
+                  <div *ngIf="showEspecial" class="col-md-12">
+                    <input
+                      class="margin-b"
+                      type="text"
+                      name="especial"
+                      formControlName="especial"
+                      id="especial"
+                      placeholder="Ingrese el tipo de propiedad"
+                    />
+                  </div>
+              </div>
+            </div>
+
+            <div class="pf-feature-price">
+              <h4>Precio</h4>
+              <div class="precio">
+                <input
+                  type="text"
+                  placeholder="Precio"
+                  name="precio"
+                  formControlName="precio"
+                  id="precio"
+                  required
+                  autofocus
+                />
+              </div>
+              <div
+                  *ngIf="
+                    getControl.precio.touched && getControl.precio.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.precio.errors?.pattern">
+                    Solo se admiten números en este campo.
+                  </div>
+                  <div *ngIf="getControl.precio.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+            </div>
+            <div class="pf-type">
+              <h4>Características de la Propiedad</h4>
+              <div class="type-item row">
+                <div class="col-md-4">
+                  <label for="garaje"
+                    >Garaje
+                    <input
+                      type="checkbox"
+                      name="garaje"
+                      formControlName="garaje"
+                      id="garaje"
+                    />
+                    <span class="checkbox"></span>
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label for="patio"
+                    >Patio
+                    <input
+                      type="checkbox"
+                      name="patio"
+                      formControlName="patio"
+                      id="patio"
+                    />
+                    <span class="checkbox"></span>
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label for="carpoch"
+                    >Carpoch
+                    <input
+                      type="checkbox"
+                      name="carpoch"
+                      formControlName="carpoch"
+                      id="carpoch"
+                    />
+                    <span class="checkbox"></span>
+                  </label>
+                </div>
+                <div class="col-md-12">
+                  <br />
+                </div>
+                <div class="col-md-6 margin-b">
+                  <input
+                  class=""
+                    type="text"
+                    name="bannos"
+                    formControlName="bannos"
+                    id="bannos"
+                    placeholder="Cantidad de baños"
+                    required
+                  autofocus
+                  />
+                  <div
+                  *ngIf="
+                    getControl.bannos.touched && getControl.bannos.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.bannos.errors?.pattern">
+                    Solo se admiten números en este campo.
+                  </div>
+                  <div *ngIf="getControl.bannos.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-6 margin-b">
+                  <input
+                    class=""
+                    type="text"
+                    name="cuartos"
+                    formControlName="cuartos"
+                    id="cuartos"
+                    placeholder="Cantidad de cuartos"
+                    required
+                  autofocus
+                  />
+                  <div
+                  *ngIf="
+                    getControl.cuartos.touched && getControl.cuartos.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div *ngIf="getControl.cuartos.errors?.pattern">
+                    Solo se admiten números en este campo.
+                  </div>
+                  <div *ngIf="getControl.cuartos.errors?.required">
+                    Este campo es obligatorio.
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pf-title">
+              <h4>Descripción</h4>
+              <textarea
+                class="form-control"
+                name="descripcion"
+                formControlName="descripcion"
+                id="descripcion"
+                placeholder="Descripción de la propiedad "
+                rows="6"
+              ></textarea>
+            </div>
+            <div class="pf-feature-image">
+              <h4>Imagenes de la Propiedad</h4>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="form-control custom-file-input"
+                  id="archivo"
+                  name="archivo"
+                  accept=".jpg,.jpeg,.png,.gif,.svg"
+                  multiple="multiple"
+                  aria-describedby="fotoPerfil"
+                  tooltip="Seleccionar imagen de perfil."
+                  (change)="onMultipleSelect($event)"
+                  multiple="multiple"
+                  #multipleImages
+                />
+                <label class="custom-file-label" for="customFile">{{
+                  t1
+                }}</label>
+              </div>
+              <div class="row">
+                <div class="col-md-3" *ngFor='let url of urls'>
+                    <img [src]="url" alt="photo" class="img-dim">
+                </div>
+              </div>
+            </div>
+            <div class="pf-property-details">
+
+
+              <div
+                  *ngIf="
+                    this.solicitudForm.valid && currentP!='Provincia' && currentM!='Municipio';
+                    then thenBlock;
+                    else elseBlock
+                  "
+                ></div>
+                <ng-template #thenBlock>
+                  <div
+                    *ngIf="!this.isLoading; then thenBlock1; else elseBlock1"
+                  ></div>
+                  <ng-template #thenBlock1
+                    ><button type="submit" class="site-btn">
+                       Actualizar Propiedad
+                    </button></ng-template
+                  >
+                  <ng-template #elseBlock1
+                    ><button type="button" class="site-btn" disabled>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      <span
+                        class="spinner-grow spinner-grow-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span></button
+                  ></ng-template>
+                </ng-template>
+                <ng-template #elseBlock
+                  ><button type="submit" class="site-btn" disabled>
+                    Actualizar Propiedad
+                  </button></ng-template
+                >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Submit Section End -->
