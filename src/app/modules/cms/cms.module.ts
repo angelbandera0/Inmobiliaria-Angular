@@ -18,6 +18,8 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
 import { EditarUserComponent } from './editar-user/editar-user.component';
 import { DetallesSolicitudCmsComponent } from './detalles-solicitud-cms/detalles-solicitud-cms.component';
 import { SharedModule } from '../shared/shared.module';
+import { EditarSolicitudCmsComponent } from './editar-solicitud-cms/editar-solicitud-cms.component';
+import { DetallesCitaCmsComponent } from './detalles-cita-cms/detalles-cita-cms.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { SharedModule } from '../shared/shared.module';
     ListadoSolicitudesComponent,
     EditarUserComponent,
     DetallesSolicitudCmsComponent,
+    EditarSolicitudCmsComponent,
+    DetallesCitaCmsComponent,
 
   ],
   imports: [

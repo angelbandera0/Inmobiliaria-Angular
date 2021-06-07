@@ -1,3 +1,4 @@
+import { DetallesCitaCmsComponent } from './detalles-cita-cms/detalles-cita-cms.component';
 import { DetallesSolicitudCmsComponent } from './detalles-solicitud-cms/detalles-solicitud-cms.component';
 import { DetallesUserComponent } from './detalles-user/detalles-user.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
@@ -10,6 +11,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { ListadoCasaCmsComponent } from './listado-casa-cms/listado-casa-cms.component';
 import { DetallesCasaCmsComponent } from './detalles-casa-cms/detalles-casa-cms.component';
 import { UserGuard } from 'src/app/guards/user.guard';
+import { EditarSolicitudCmsComponent } from './editar-solicitud-cms/editar-solicitud-cms.component';
 
 const routes: Routes = [
   { path: '', component: ShopComponent },
@@ -18,10 +20,11 @@ const routes: Routes = [
   { path: 'listadocasa', component: ListadoCasaCmsComponent },
   { path: 'detallescasa/:id', component: DetallesCasaCmsComponent },
   { path: 'detallesuser/:id', component: DetallesUserComponent, canActivate:[UserGuard] },
+  { path: 'detallescita/:id', component: DetallesCitaCmsComponent, canActivate:[UserGuard] },
   { path: 'addsolicitud', component: AddSolicitudCmsComponent, canActivate:[UserGuard] },
   { path: 'listadosolicitud', component: ListadoSolicitudesComponent },
   { path: 'detallessolicitud/:id', component: DetallesSolicitudCmsComponent, canActivate:[UserGuard] },
-  //{ path: '**', redirectTo: '/error/404' },
+  { path: 'editarsolicitud/:id', component: EditarSolicitudCmsComponent, canActivate:[UserGuard] },
 ];
 
 @NgModule({
