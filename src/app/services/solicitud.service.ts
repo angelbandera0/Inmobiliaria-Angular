@@ -42,4 +42,11 @@ export class SolicitudService {
   aprobarSolicitud(id:string,data:FormData):Observable<any>{
     return this.http.post<any>(`${environment.server}/solicitud/aprobar/${id}`,data,this.httpOptions);
   }
+  updateSolicitud(id: string, data: FormData): Observable<any> {
+    return this.http.put<any>(
+      `${environment.server}/solicitud/${id}`,
+      data,
+      this.httpOptions
+    );
+  }
 }
