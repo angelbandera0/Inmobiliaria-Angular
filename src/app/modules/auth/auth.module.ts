@@ -10,8 +10,11 @@ import {
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ConfirnmAccountComponent } from './confirnm-account/confirnm-account.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, ConfirnmAccountComponent, ChangePasswordComponent],
   imports: [CommonModule, AuthRoutingModule, SocialLoginModule, FormsModule,ReactiveFormsModule],
   providers: [
     {

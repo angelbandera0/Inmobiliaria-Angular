@@ -7,7 +7,7 @@
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="text-center row">
               <div class="col-md-12">
-                <img src="../../../../assets/img/logo.png" alt="" />
+                <img routerLink="/" routerLinkActive="active" class="pointer" src="../../../../assets/img/logo.png" alt="" />
                 <br />
                 <br />
                 <h4>Inciar Sesión en el Sistema</h4>
@@ -76,7 +76,15 @@
                 <p class="left">
                   No posees cuenta aún?
                   <a routerLink="/auth/register" routerLinkActive="active"
-                    >Registrarse.
+                    > Registrarse.
+                  </a>
+                </p>
+                <br>
+                <br>
+                <p class="left">
+                  Has olvidado tu contrseña?
+                  <a routerLink="/auth/resetpassword" routerLinkActive="active"
+                    > Recuperar.
                   </a>
                 </p>
                 <br>

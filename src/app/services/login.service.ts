@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginResponse } from '../models/login-response.model';
 import { LoginInfo } from '../models/login-info.model';
@@ -30,11 +30,20 @@ export class LoginService {
       httpOptions
     );
   }
-  /*singUp(info: FormData): Observable<string> {
-    return this.http.post<string>(
-      `${this.url}auth/register`,
-      info,
-      httpOptions
+  solicitarLinkSetPassword(data: FormData): Observable<any> {
+    return this.http.post<any>(
+      `${environment.server}/auth/requestsetpassword`,
+      data
     );
-  }*/
+  }
+  changePassword(token: string | null, data: FormData): Observable<any> {
+    let params = new HttpParams().append('token', `${token}`);
+    return this.http.post<any>(
+      `${environment.server}/auth/resetpassword`,
+      data,
+      {
+        params,
+      }
+    );
+  }
 }

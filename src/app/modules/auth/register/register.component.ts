@@ -1,3 +1,4 @@
+import { NotificationsToastrService } from 'src/app/services/notifications-toastr.service';
 import { UserValidationsService } from './../../../services/user-validations.service';
 import { User } from './../../../models/user.model';
 import {
@@ -45,7 +46,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private userValidations: UserValidationsService
+    private userValidations: UserValidationsService,
+    private notificationsToastrService: NotificationsToastrService
   ) {}
 
   ngOnInit(): void {
@@ -81,6 +83,9 @@ export class RegisterComponent implements OnInit {
     this.userService.createUser(formData).subscribe({
       next: (res) => {
         console.log(res);
+        this.notificationsToastrService.showSuccess(
+          'La cuenta se ha creado correctamente. Proceda a acceder a su correo para verificar su cuenta.'
+        );
       },
       complete: () => {
         this.loading = false;
@@ -92,6 +97,9 @@ export class RegisterComponent implements OnInit {
         console.log(this.errorsList);
         this.existError = true;
         this.loading = false;
+        this.notificationsToastrService.showError(
+          'Ha ocurrido un error en proceso de registrar la cuenta.'
+        );
       },
     });
   }
@@ -123,5 +131,4 @@ export class RegisterComponent implements OnInit {
   get getControl() {
     return this.registerForm.controls;
   }
-
 }
