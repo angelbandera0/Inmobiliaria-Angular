@@ -70,4 +70,8 @@ export class CasaService {
       this.httpOptions
     );
   }
+
+  casaRecientes():Observable<any>{
+    return this.http.get<any>(`${environment.server}/casa/ultimas`);
+  }
 }
