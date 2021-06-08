@@ -5,8 +5,7 @@
     <span class="icon_close"></span>
   </div>
   <div class="logo">
-    <a routerLink="/"
-    routerLinkActive="active">
+    <a routerLink="/" routerLinkActive="active">
       <img src="./assets/img/logo.png" alt="" />
     </a>
   </div>
@@ -14,10 +13,25 @@
   <div class="om-widget">
     <ul>
       <li><i class="icon_mail_alt"></i> habanahousecuba@gmail.com</li>
-              <li>
-                <i class="fa fa-mobile-phone"></i> 76830701
-                <span>55143022</span>
-              </li>
+      <li>
+        <i class="fa fa-mobile-phone"></i
+        ><a
+          class="tel"
+          href="http://tel:+076830701"
+          target="_blank"
+          rel="noopener"
+          >76830701</a
+        >
+        <span
+          ><a
+            class="tel"
+            href="http://tel:+5355143022"
+            target="_blank"
+            rel="noopener"
+            >+53 55143022</a
+          ></span
+        >
+      </li>
     </ul>
     <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
     <ng-template #thenBlock
@@ -29,8 +43,9 @@
       ></ng-template
     >
     <ng-template #elseBlock
-      ><a routerLink="/addsolicitud"
-      routerLinkActive="active" class="hw-btn">Propuesta de venta</a></ng-template
+      ><a routerLink="/addsolicitud" routerLinkActive="active" class="hw-btn"
+        >Propuesta de venta</a
+      ></ng-template
     >
   </div>
   <div class="om-social">
@@ -50,8 +65,7 @@
       <div class="row">
         <div class="col-lg-2">
           <div class="logo">
-            <a class="point" routerLink="/"
-            routerLinkActive="active"
+            <a class="point" routerLink="/" routerLinkActive="active"
               ><img class="point" src="./assets/img/logo.png" alt=""
             /></a>
           </div>
@@ -61,8 +75,23 @@
             <ul>
               <li><i class="icon_mail_alt"></i> habanahousecuba@gmail.com</li>
               <li>
-                <i class="fa fa-mobile-phone"></i> 76830701
-                <span>55143022</span>
+                <i class="fa fa-mobile-phone"></i
+                ><a
+                  class="tel"
+                  href="http://tel:+076830701"
+                  target="_blank"
+                  rel="noopener"
+                  >76830701</a
+                >
+                <span
+                  ><a
+                    class="tel"
+                    href="http://tel:+5355143022"
+                    target="_blank"
+                    rel="noopener"
+                    >+53 55143022</a
+                  ></span
+                >
               </li>
             </ul>
             <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
@@ -91,21 +120,37 @@
         <div class="col-lg-6">
           <nav class="nav-menu">
             <ul>
-              <li *ngIf="!isAdmin"><a routerLink="/" routerLinkActive="active">Inicio</a></li>
+              <li *ngIf="!isAdmin">
+                <a routerLink="/" routerLinkActive="active">Inicio</a>
+              </li>
               <li>
                 <a href="#">Propiedades</a>
                 <ul class="dropdown">
-                  <li *ngIf="!isAdmin"><a routerLink="/listadocasa" routerLinkActive="active">Listado de Propiedades</a></li>
-                  </ul>
+                  <li *ngIf="!isAdmin">
+                    <a routerLink="/listadocasa" routerLinkActive="active"
+                      >Listado de Propiedades</a
+                    >
+                  </li>
+                </ul>
               </li>
               <li>
                 <a href="#">Solicitudes</a>
                 <ul class="dropdown">
-                  <li *ngIf="!isAdmin"><a routerLink="/addsolicitud" routerLinkActive="active">Solicitud de Venta</a></li>
+                  <li *ngIf="!isAdmin">
+                    <a routerLink="/addsolicitud" routerLinkActive="active"
+                      >Solicitud de Venta</a
+                    >
+                  </li>
                 </ul>
               </li>
-              <li *ngIf="!isAdmin"><a routerLink="/contactos" routerLinkActive="active">Contactos</a></li>
-              <li *ngIf="!isAdmin"><a routerLink="/acerca" routerLinkActive="active">Acerca de</a></li>
+              <li *ngIf="!isAdmin">
+                <a routerLink="/contactos" routerLinkActive="active"
+                  >Contactos</a
+                >
+              </li>
+              <li *ngIf="!isAdmin">
+                <a routerLink="/acerca" routerLinkActive="active">Acerca de</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -130,8 +175,16 @@
                     ><i class="fa fa-user-circle"></i> Bienvenido, {{ name }}</a
                   >
                   <ul class="dropdown">
-                    <li><a routerLink="/detallesuser/{{id}}" routerLinkActive="active">Ver perfil</a></li>
-                    <li class="point" (click)="logout()"><a >Desconectarse</a></li>
+                    <li>
+                      <a
+                        routerLink="/detallesuser/{{ id }}"
+                        routerLinkActive="active"
+                        >Ver perfil</a
+                      >
+                    </li>
+                    <li class="point" (click)="logout()">
+                      <a>Desconectarse</a>
+                    </li>
                   </ul>
                 </li>
               </ul>
