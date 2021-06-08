@@ -20,6 +20,7 @@ import { DetallesSolicitudCmsComponent } from './detalles-solicitud-cms/detalles
 import { SharedModule } from '../shared/shared.module';
 import { EditarSolicitudCmsComponent } from './editar-solicitud-cms/editar-solicitud-cms.component';
 import { DetallesCitaCmsComponent } from './detalles-cita-cms/detalles-cita-cms.component';
+import { CardShopComponent } from './shop/card-shop/card-shop.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DetallesCitaCmsComponent } from './detalles-cita-cms/detalles-cita-cms.
     DetallesSolicitudCmsComponent,
     EditarSolicitudCmsComponent,
     DetallesCitaCmsComponent,
+    CardShopComponent,
 
   ],
   imports: [

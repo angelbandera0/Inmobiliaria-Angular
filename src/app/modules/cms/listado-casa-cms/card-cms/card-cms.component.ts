@@ -31,6 +31,7 @@ export class CardCmsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.user.uid){
     for (let i = 0; i < this.casa.likes.length; i++) {
       if (
         (this.user.myLikes as unknown as string[]).includes(
@@ -43,6 +44,7 @@ export class CardCmsComponent implements OnInit {
         this.casa.like = this.casa.likes[i];
       }
     }
+  }
 
   }
 

@@ -60,17 +60,21 @@ export class ListadoCasaCmsComponent implements OnInit {
     this.formData.delete('vendida');
     this.formData.append('vendida',`${false}`);
     const id = this.tokenStorageService.getId();
-    this.userService.userById(id ? id : 'none').subscribe({
+    if(id){
+    this.userService.userById(id ? id : '').subscribe({
       next: (res) => {
         console.log(res);
         this.user = res.user;
-        console.log(this.user.myLikes);
+        console.log(this.user?.myLikes);
         this.loadListado();
       },
       error: (error) => {
         console.log(error);
       },
     });
+  }else{
+    this.loadListado();
+  }
 
     console.log('object');
   }
