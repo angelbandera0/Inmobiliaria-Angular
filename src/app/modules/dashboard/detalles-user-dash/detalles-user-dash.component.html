@@ -1,0 +1,353 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Perfil del Usuario</h4>
+          <div class="bt-option">
+            <a routerLink="/" routerLinkActive="active"><i class="fa fa-home"></i> Inicio</a>
+            <span>Perfil de usario</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- About Section Begin -->
+<section *ngIf="user" class="about-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <app-pagina-anterior></app-pagina-anterior>
+      </div>
+      <div class="col-lg-6">
+        <div class="about-text">
+          <div class="at-title">
+            <h3>Infomación del Perfil</h3>
+          </div>
+          <div class="at-feature">
+            <div class="af-item">
+              <div class="af-text">
+                <h6>Nombre y Apellidos:</h6>
+                <p>{{ user.name }}</p>
+              </div>
+            </div>
+            <div class="af-item">
+              <div class="af-text">
+                <h6>Correo electrónico:</h6>
+                <p>{{ user.email }}</p>
+              </div>
+            </div>
+            <div class="af-item">
+              <div class="af-text">
+                <h6>Fecha de creación:</h6>
+                <p>{{ parserFecha(user.createdAt) }}</p>
+              </div>
+            </div>
+            <div class="af-item">
+              <div class="af-text">
+                <h6>Fecha de Modifición:</h6>
+                <p>{{ parserFecha(user.updatedAt) }}</p>
+              </div>
+            </div>
+            <div class="af-item">
+              <div class="af-text">
+                <h6>Operaciones:</h6>
+                <ul>
+                  <li>
+                    <button
+                      type="submit"
+                      class="site-btn"
+                      (click)="openModalDialogAddCita(content, '')"
+                    >
+                      Editar Perfil
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div
+          class="about-pic set-bg"
+          [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
+          data-setbg="img/about-us.jpg"
+        ></div>
+      </div>
+      <div class="col-lg-12">
+        <hr />
+        <!-- Property Details Section Begin -->
+        <section class="property-details-section">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 collg12">
+                <div class="pd-text">
+                  <div class="pd-board">
+                    <div class="tab-board">
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a
+                            class="nav-link active"
+                            data-toggle="tab"
+                            href="#tabs-1"
+                            role="tab"
+                            >Listado de Citas</a
+                          >
+                        </li>
+                        <li class="nav-item">
+                          <a
+                            class="nav-link"
+                            data-toggle="tab"
+                            href="#tabs-2"
+                            role="tab"
+                            >Listado de Solicitudes</a
+                          >
+                        </li>
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div
+                          class="tab-pane active"
+                          id="tabs-1"
+                          role="tabpanel"
+                        >
+                          <table
+                            class="
+                              table
+                              table-borderless
+                              table-responsive-xl
+                              table-striped
+                            "
+                          >
+                            <thead>
+                              <tr>
+                                <th>No.</th>
+                                <th>Detalles</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Creada</th>
+                                <th>Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="citas"
+                                let-i="index"
+                              >
+                                <tr>
+                                  <td>{{ i + 1 }}</td>
+                                  <td>{{ item.detallesCita }}</td>
+                                  <td>{{ item.estado }}</td>
+                                  <td>{{ parserFecha(item.fecha) }}</td>
+                                  <td>{{ parserFecha(item.createdAt) }}</td>
+                                  <td>
+                                    <a
+                                      routerLink="/detallescita/{{ item._id }}"
+                                      routerLinkActive="active"
+                                      ><i class="fa fa-search"></i
+                                    ></a>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th>No.</th>
+                                <th>Detalles</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Creada</th>
+                                <th>Acciones</th>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                          <table
+                            class="
+                              table
+                              table-borderless
+                              table-responsive-xl
+                              table-striped
+                            "
+                          >
+                            <thead>
+                              <tr>
+                                <th>No.</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Provincia</th>
+                                <th>Municipio</th>
+                                <th>Localidad</th>
+                                <th>Estado de Aprobación</th>
+                                <th>Fecha de envío</th>
+                                <th>Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-template
+                                ngFor
+                                let-item
+                                [ngForOf]="solicitudes"
+                                let-i="index"
+                              >
+                                <tr>
+                                  <td>{{ i + 1 }}</td>
+                                  <td>{{ item.nombre }}</td>
+                                  <td>{{ item.apellidos }}</td>
+                                  <td>{{ item.provincia }}</td>
+                                  <td>{{ item.municipio }}</td>
+                                  <td>{{ item.localidad }}</td>
+                                  <td
+                                    class="text-warning"
+                                    *ngIf="item.estado === 'Pendiente'"
+                                  >
+                                    {{ item.estado }}
+                                  </td>
+                                  <td
+                                    class="text-danger"
+                                    *ngIf="item.estado === 'Rechazada'"
+                                  >
+                                    {{ item.estado }}
+                                  </td>
+                                  <td
+                                    class="text-success"
+                                    *ngIf="item.estado === 'Aprobada'"
+                                  >
+                                    {{ item.estado }}
+                                  </td>
+                                  <td>{{ parserFecha(item.createdAt) }}</td>
+                                  <td class="text-center">
+                                    <a
+                                      routerLink="/detallessolicitud/{{
+                                        item._id
+                                      }}"
+                                      routerLinkActive="active"
+                                      ><i class="fa fa-search"></i
+                                    ></a>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th>No.</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Provincia</th>
+                                <th>Municipio</th>
+                                <th>Localidad</th>
+                                <th>Estado de Aprobación</th>
+                                <th>Fecha de envío</th>
+                                <th>Acciones</th>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About Section End -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Editar Perfil</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <form (ngSubmit)="onSubmit()">
+      <p for="fotoPerfil" class="left">Nombre y Apellidos:</p>
+      <input
+        type="text"
+        id="inputName"
+        placeholder="Ingrese el nombre"
+        name="name"
+        class="form-control"
+        tooltip="Nombre del dueño de la nueva cuenta."
+        [(ngModel)]="user.name"
+        #name="ngModel"
+        (change)="modify($event)"
+        (keyup)="modify($event)"
+        required
+        autofocus
+      />
+      <br />
+      <p for="fotoPerfil" class="left">Foto de Perfil:</p>
+
+      <div class="custom-file">
+        <input
+          type="file"
+          class="form-control custom-file-input"
+          id="fotoPerfil"
+          name="fotoPerfil"
+          aria-describedby="fotoPerfil"
+          tooltip="Seleccionar imagen de perfil."
+          (change)="onFileSelect($event, FotoPerfil.files)"
+          accept="image/*"
+          #FotoPerfil
+        />
+        <label class="custom-file-label" for="customFile">{{ t1 }}</label>
+      </div>
+      <br />
+      <br />
+
+      <p for="fotoPerfil" class="left">Nueva Contraseña:</p>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        tooltip="Nombre del dueño de la nueva cuenta."
+        (change)="modify($event)"
+        (keyup)="modify($event)"
+        required
+        autofocus
+      />
+      <br />
+
+      <!--<p for="fotoPerfil" class="left">Confirme la Contraseña:</p>
+      <input
+        type="password"
+        id="inputPasswordConf"
+        name="passwordconf"
+        class="form-control"
+        tooltip="Nombre del dueño de la nueva cuenta."
+        (change)="modify($event)"
+        (keyup)="modify($event)"
+        required
+        autofocus
+      />
+      <br />-->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
+    <button type="button" ngbAutofocus class="site-btn inlb" (click)="onSubmit()">Actualizar</button>
+  </div>
+</ng-template>

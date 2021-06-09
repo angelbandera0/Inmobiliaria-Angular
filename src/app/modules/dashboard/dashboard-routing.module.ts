@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdicionarCasaComponent } from './adicionar-casa/adicionar-casa.component';
 import { AdminGuard } from 'src/app/guards/admin.guard';
+import { DetallesUserDashComponent } from './detalles-user-dash/detalles-user-dash.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AdminGuard] },
@@ -57,6 +58,11 @@ const routes: Routes = [
   {
     path: 'listadoventas',
     component: ListadoVentasDashComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'detallesuser/:id',
+    component: DetallesUserDashComponent,
     canActivate: [AdminGuard],
   },
 
