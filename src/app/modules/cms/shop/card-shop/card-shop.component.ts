@@ -26,25 +26,30 @@ export class CardShopComponent implements OnInit {
     private modalService: NgbModal,
     private tokenStorageService:TokenStorageService
   ) {
-    console.log(this.user);
-    this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
+
   }
 
   ngOnInit(): void {
-    if(this.user.uid){
-      for (let i = 0; i < this.casa.likes.length; i++) {
-        if (
-          (this.user.myLikes as unknown as string[]).includes(
-            this.casa.likes[i] as unknown as string
-          )
-        ) {
-          console.log('si');
-          this.isLiked = true;
-          this.like=this.casa.likes[i];
-          this.casa.like = this.casa.likes[i];
-        }
-      }
+    console.log(this.user);
+    this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
+try {
+  for (let i = 0; i < this.casa.likes.length; i++) {
+    if (
+      (this.user.myLikes as unknown as string[]).includes(
+        this.casa.likes[i] as unknown as string
+      )
+    ) {
+      console.log('si');
+      this.isLiked = true;
+      this.like=this.casa.likes[i];
+      this.casa.like = this.casa.likes[i];
     }
+  }
+} catch (error) {
+
+}
+
+
   }
 
   openModalDialogDeletePropiedad(content: any, id: string) {
@@ -67,6 +72,7 @@ export class CardShopComponent implements OnInit {
     console.log(idCasa);
     const fd = new FormData();
     fd.append('idCasa', idCasa);
+    console.log(this.likesService);
     this.likesService.addLike(fd).subscribe({
       next: (res) => {
         console.log(res);

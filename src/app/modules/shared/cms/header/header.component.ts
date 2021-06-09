@@ -30,6 +30,6 @@ export class HeaderComponent implements OnInit {
     this.isLogin = false;
     this.name= null;
     this.id= null;
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth/login'])
   }
 }

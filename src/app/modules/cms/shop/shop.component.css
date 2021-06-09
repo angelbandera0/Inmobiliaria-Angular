@@ -144,3 +144,10 @@ select {
 .pointer {
   cursor: pointer;
 }
+
+.social-ntw{
+  color: white;
+}
+.social-ntw:hover{
+  color: white;
+}

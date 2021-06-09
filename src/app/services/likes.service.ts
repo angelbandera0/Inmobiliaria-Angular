@@ -15,13 +15,14 @@ export class LikesService {
     private http: HttpClient,
     private tokenStorageService: TokenStorageService
   ) {
+
+  }
+
+  addLike(data: FormData): Observable<any> {
     this.token = this.tokenStorageService.getToken();
     this.httpOptions = {
       headers: new HttpHeaders({ 'x-token': this.token }),
     };
-  }
-
-  addLike(data: FormData): Observable<any> {
     return this.http.post<any>(
       `${environment.server}/like`,
       data,
@@ -29,6 +30,10 @@ export class LikesService {
     );
   }
   removeLike(id: string): Observable<any> {
+    this.token = this.tokenStorageService.getToken();
+    this.httpOptions = {
+      headers: new HttpHeaders({ 'x-token': this.token }),
+    };
     return this.http.delete<any>(
       `${environment.server}/like/${id}`,
       this.httpOptions
