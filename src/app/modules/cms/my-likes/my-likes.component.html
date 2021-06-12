@@ -1,0 +1,45 @@
+<!-- Breadcrumb Section Begin -->
+<section
+  class="breadcrumb-section spad set-bg"
+  data-setbg="./assets/img/breadcrumb-bg.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h4>Propiedades Favoritas</h4>
+          <div class="bt-option">
+            <a routerLink="/" routerLinkActive="active"><i class="fa fa-home"></i> Inicio</a>
+            <span>Propiedades Favoritas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+
+
+<!-- Property Section Begin -->
+<section class="property-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <h4>Listado de Propiedades</h4>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="listadoCasas" class="row">
+      <div *ngFor="let casa of listadoCasas" class="col-lg-4 col-md-6">
+
+      <app-card-listado  [casa]="casa"></app-card-listado>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- Property Section End -->
+
+

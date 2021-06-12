@@ -21,6 +21,8 @@ import { SharedModule } from '../shared/shared.module';
 import { EditarSolicitudCmsComponent } from './editar-solicitud-cms/editar-solicitud-cms.component';
 import { DetallesCitaCmsComponent } from './detalles-cita-cms/detalles-cita-cms.component';
 import { CardShopComponent } from './shop/card-shop/card-shop.component';
+import { MyLikesComponent } from './my-likes/my-likes.component';
+import { CardListadoComponent } from './my-likes/card-listado/card-listado.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CardShopComponent } from './shop/card-shop/card-shop.component';
     EditarSolicitudCmsComponent,
     DetallesCitaCmsComponent,
     CardShopComponent,
+    MyLikesComponent,
+    CardListadoComponent,
 
   ],
   imports: [

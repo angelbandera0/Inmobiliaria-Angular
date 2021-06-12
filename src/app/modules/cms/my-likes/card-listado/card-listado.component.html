@@ -1,0 +1,35 @@
+<div class="property-item">
+  <div
+    class="pi-pic set-bg"
+    routerLink="/detallescasa/{{ casa._id }}"
+    routerLinkActive="active"
+    [ngStyle]="{ 'background-image': 'url(' + casa.img[0] + ')' }"
+  >
+    <div class="label c-magenta">
+      <a routerLink="/detallescasa/{{ casa._id }}" routerLinkActive="active"
+        ><i class="fa fa-search fa-custom"></i
+      ></a>
+    </div>
+  </div>
+  <div class="pi-text">
+
+    <div class="pt-price">{{ casa.precio }}</div>
+    <h5>
+      <a routerLink="/detallescasa/{{ casa._id }}" routerLinkActive="active">{{
+        casa.title
+      }}</a>
+    </h5>
+    <p>
+      <span class="icon_pin_alt"></span>{{ casa.provincia }},
+      {{ casa.municipio }}, {{ casa.localidad }}
+    </p>
+    <ul>
+      <li><i class="fa fa-bathtub"></i> {{ casa.cantBannos }}</li>
+      <li><i class="fa fa-bed"></i> {{ casa.cantCuartos }}</li>
+      <li>
+        <i class="fa fa-automobile"></i>
+        {{ casa.tieneGaraje ? "Si" : "No" }}
+      </li>
+    </ul>
+  </div>
+</div>

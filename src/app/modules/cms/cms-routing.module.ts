@@ -12,6 +12,7 @@ import { ListadoCasaCmsComponent } from './listado-casa-cms/listado-casa-cms.com
 import { DetallesCasaCmsComponent } from './detalles-casa-cms/detalles-casa-cms.component';
 import { UserGuard } from 'src/app/guards/user.guard';
 import { EditarSolicitudCmsComponent } from './editar-solicitud-cms/editar-solicitud-cms.component';
+import { MyLikesComponent } from './my-likes/my-likes.component';
 
 const routes: Routes = [
   { path: '', component: ShopComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'listadocasa', component: ListadoCasaCmsComponent },
   { path: 'detallescasa/:id', component: DetallesCasaCmsComponent },
   { path: 'detallesuser/:id', component: DetallesUserComponent, canActivate:[UserGuard] },
+  { path: 'mylikes/:id', component: MyLikesComponent, canActivate:[UserGuard] },
   { path: 'detallescita/:id', component: DetallesCitaCmsComponent, canActivate:[UserGuard] },
   { path: 'addsolicitud', component: AddSolicitudCmsComponent, canActivate:[UserGuard] },
   { path: 'listadosolicitud', component: ListadoSolicitudesComponent },

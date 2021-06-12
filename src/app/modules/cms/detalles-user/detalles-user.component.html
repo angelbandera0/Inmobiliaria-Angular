@@ -9,7 +9,9 @@
         <div class="breadcrumb-text">
           <h4>Perfil del Usuario</h4>
           <div class="bt-option">
-            <a routerLink="/" routerLinkActive="active"><i class="fa fa-home"></i> Inicio</a>
+            <a routerLink="/" routerLinkActive="active"
+              ><i class="fa fa-home"></i> Inicio</a
+            >
             <span>Perfil de usario</span>
           </div>
         </div>
@@ -60,13 +62,23 @@
               <div class="af-text">
                 <h6>Operaciones:</h6>
                 <ul>
+
                   <li>
                     <button
-                      type="submit"
+                      type="button"
                       class="site-btn"
                       (click)="openModalDialogAddCita(content, '')"
                     >
                       Editar Perfil
+                    </button>
+                    <div style="height: 1rem;"></div>
+                    <button
+                      type="button"
+                      class="site-btn"
+                      routerLink="/mylikes/{{ user.uid }}"
+                      routerLinkActive="active"
+                    >
+                    Propiedades Favoritas
                     </button>
                   </li>
                 </ul>
@@ -130,7 +142,6 @@
                             <thead>
                               <tr>
                                 <th>No.</th>
-                                <th>Detalles</th>
                                 <th>Estado</th>
                                 <th>Fecha</th>
                                 <th>Creada</th>
@@ -146,7 +157,6 @@
                               >
                                 <tr>
                                   <td>{{ i + 1 }}</td>
-                                  <td>{{ item.detallesCita }}</td>
                                   <td>{{ item.estado }}</td>
                                   <td>{{ parserFecha(item.fecha) }}</td>
                                   <td>{{ parserFecha(item.createdAt) }}</td>
@@ -348,6 +358,13 @@
   </div>
   <div class="modal-footer">
     <a class="primary-btn" (click)="modal.close('Close click')">Cancelar</a>
-    <button type="button" ngbAutofocus class="site-btn inlb" (click)="onSubmit()">Actualizar</button>
+    <button
+      type="button"
+      ngbAutofocus
+      class="site-btn inlb"
+      (click)="onSubmit()"
+    >
+      Actualizar
+    </button>
   </div>
 </ng-template>
