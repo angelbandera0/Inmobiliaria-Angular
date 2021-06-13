@@ -46,4 +46,10 @@ export class LoginService {
       }
     );
   }
+  resendCorfirmationEmail(data: FormData): Observable<any> {
+    return this.http.post<any>(
+      `${environment.server}/auth/resendemail`,
+      data
+    );
+  }
 }
