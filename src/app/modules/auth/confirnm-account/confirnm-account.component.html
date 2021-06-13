@@ -1,1 +1,113 @@
-<p>confirnm-account works!</p>
+<!-- Property Submit Section Begin -->
+<section class="property-submit-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <div class="property-submit-form">
+          <form>
+            <div class="text-center row">
+              <div class="col-md-12">
+                <img
+                  routerLink="/"
+                  routerLinkActive="active"
+                  class="pointer"
+                  src="../../../../assets/img/logo.png"
+                  alt=""
+                />
+                <br />
+                <br />
+                <h4>Verifificar Cuenta</h4>
+              </div>
+              <div class="col-md-12 text-center">
+                <ng-container *ngIf="isVerified; else elseTemplate">
+                  <p>
+                    Su cuenta ha sido verificada satisfactoriamente. Proceda a
+                    iniciar sesión.
+                  </p>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <p>
+                    Revise el buzón de su correo y pulse sobre el link para
+                    terminar el proceso de verificación de su cuenta. En caso de
+                    que el correo no le ha llegado presione en "Reenviar
+                    mensaje"
+                  </p>
+                </ng-template>
+              </div>
+              <br />
+              <br />
+            </div>
+
+            <ng-container *ngIf="isVerified; else elseTemplateN">
+              <button type="button" class="site-btn" routerLink="/auth/login" routerLinkActive="active">
+                Iniciar Sesión
+              </button>
+              <br />
+                <br />
+                <hr />
+                <div>
+                  <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved | This template is made with
+                    <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </p>
+                </div>
+            </ng-container>
+            <ng-template #elseTemplateN>
+              <div class="col-md-12 padding-zero">
+                <br />
+                <div *ngIf="!loading; then thenBlock1; else elseBlock1"></div>
+                <ng-template #thenBlock1
+                  ><button type="submit" class="site-btn" (click)="resendEmail()">
+                    Reeenviar mensaje
+                  </button></ng-template
+                >
+                <ng-template #elseBlock1
+                  ><button type="button" class="site-btn" disabled>
+                    <span
+                      class="spinner-grow spinner-grow-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      class="spinner-grow spinner-grow-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      class="spinner-grow spinner-grow-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span></button
+                ></ng-template>
+                <br />
+                <br />
+                <hr />
+                <div>
+                  <p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved | This template is made with
+                    <i class="fa fa-heart" aria-hidden="true"></i> by
+                    <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Property Submit Section End -->

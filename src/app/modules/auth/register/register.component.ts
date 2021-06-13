@@ -17,6 +17,7 @@ import {
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 declare var activee: any;
 // Declaro las variables de jQuery
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private userValidations: UserValidationsService,
+    private router: Router,
     private notificationsToastrService: NotificationsToastrService
   ) {}
 
@@ -86,9 +88,11 @@ export class RegisterComponent implements OnInit {
         this.notificationsToastrService.showSuccess(
           'La cuenta se ha creado correctamente. Proceda a acceder a su correo para verificar su cuenta.'
         );
+        this.router.navigate([`/auth/confirmaccount/${res.user.uid}?email=${res.user.email}`]);
       },
       complete: () => {
         this.loading = false;
+
       },
       error: (res) => {
         res.error.errors.forEach((element: any) => {

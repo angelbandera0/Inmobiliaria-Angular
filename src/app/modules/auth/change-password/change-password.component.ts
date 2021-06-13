@@ -18,6 +18,7 @@ import { NotificationsToastrService } from 'src/app/services/notifications-toast
 export class ChangePasswordComponent implements OnInit {
   registerForm!: FormGroup;
   loading = false;
+  show=false;
   token!: string | null;
   constructor(
     private formBuilder: FormBuilder,
@@ -58,9 +59,11 @@ export class ChangePasswordComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
+        this.show=true;
       },
       error: (res) => {
         this.loading = false;
+        this.show=true;
         this.notificationsToastrService.showError('Ha ocurrido un error durante el proceso de cambiar la contraseña.');
       },
     });

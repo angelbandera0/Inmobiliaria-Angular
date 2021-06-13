@@ -42,7 +42,7 @@ export class DetallesUserComponent implements OnInit {
 
   ngOnInit(): void {
     activee($);
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params.id;
     this.userService.userAgregaciones(this.id).subscribe({
       next: (res) => {
         console.log(res);

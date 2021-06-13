@@ -10,6 +10,7 @@ import { ConfirnmAccountComponent } from './confirnm-account/confirnm-account.co
 const routes: Routes = [
   { path: 'login', component: LoginComponent,canActivate: [LoginGuard], },
   { path: 'register', component: RegisterComponent },
+  //{ path: 'confirmaccount/:id', component: ConfirnmAccountComponent },
   { path: 'confirmaccount/:id', component: ConfirnmAccountComponent },
   { path: 'resetpassword', component: ResetPasswordComponent },
   { path: 'changepassword', component: ChangePasswordComponent },
