@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConfirnmAccountComponent } from './confirnm-account/confirnm-account.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent,canActivate: [LoginGuard], },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   //{ path: 'confirmaccount/:id', component: ConfirnmAccountComponent },
   { path: 'confirmaccount/:id', component: ConfirnmAccountComponent },

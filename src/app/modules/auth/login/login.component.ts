@@ -7,7 +7,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   SocialAuthService,
   GoogleLoginProvider,
@@ -17,6 +17,7 @@ import { LoginInfo } from 'src/app/models/login-info.model';
 import { LoginService } from 'src/app/services/login.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { LoginInfoGoogle } from 'src/app/models/login-info-google.model';
+import { first } from 'rxjs/operators';
 
 // Declaro las variables de jQuery
 declare var activee: any;
@@ -41,14 +42,24 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   private loginInfo!: LoginInfo;
   show = false;
-
+  error = '';
+  returnUrl!: string;
   constructor(
     private authServiceSocial: SocialAuthService,
     private loginService: LoginService,
     private tokenStorage: TokenStorageService,
     private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    // redirect to home if already logged in
+    console.log(this.loginService.userValue);
+    if (this.loginService.userValue) {
+      this.loginService.userValue.user.rol.rol === Roles.ADMIN_ROLE
+        ? this.router.navigate(['/dashboard'])
+        : this.router.navigate(['/']);
+    }
+  }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
@@ -74,9 +85,41 @@ export class LoginComponent implements OnInit {
     formData.append('password', this.loginForm.get('password')?.value);
     console.log(formData.get('email'));
     console.log(formData.get('password'));
+    this.loginService
+      .login(formData)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          console.log(res.user.rol?.rol);
+          this.tokenStorage.saveToken(res.token);
+          this.tokenStorage.saveId(res.user.uid);
+          this.tokenStorage.saveUsername(res.user.name);
+          this.tokenStorage.saveAuthorities(res.user.rol.rol);
+          console.log(Roles.USER_ROLE.toString());
+          this.loading = false;
+          if (Roles.USER_ROLE.toString() === res.user.rol.rol) {
+            this.router.navigate(['/']);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
+        },
+        complete: () => {
+          this.loading = false;
+        },
+        error: (error) => {
+          console.log(error);
+          /*if (!error?.error?.msg) {
+            this.errorsList.push(error.error.errors[0].msg);
+          } else {
+            this.errorsList.push(error.error.msg);
+          }*/
+          this.existError = true;
+          this.loading = false;
+        },
+      });
 
     // tslint:disable-next-line: deprecation
-    this.loginService.signIn(formData).subscribe({
+    /*this.loginService.signIn(formData).subscribe({
       next: (res) => {
         console.log(res.user.rol?.rol);
         this.tokenStorage.saveToken(res.token);
@@ -103,7 +146,7 @@ export class LoginComponent implements OnInit {
         this.existError = true;
         this.loading = false;
       },
-    });
+    });*/
   }
 
   signInWithGoogle(): void {

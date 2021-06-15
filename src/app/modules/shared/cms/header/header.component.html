@@ -8,53 +8,50 @@
     <a routerLink="/" routerLinkActive="active">
       <img src="./assets/img/logo.png" alt="" />
     </a>
+
   </div>
-  <div id="mobile-menu-wrap"></div>
-  <div class="om-widget">
-    <ul>
-      <li><i class="icon_mail_alt"></i> habanahousecuba@gmail.com</li>
-      <li>
-        <i class="fa fa-mobile-phone"></i
-        ><a
-          class="tel"
-          href="http://tel:+076830701"
-          target="_blank"
-          rel="noopener"
-          >76830701</a
-        >
-        <span
+  <div id="mobile-menu-wrap">
+    <div class="om-widget">
+      <ul>
+        <li><i class="icon_mail_alt"></i> habanahousecuba@gmail.com</li>
+        <li>
+          <i class="fa fa-mobile-phone"></i
           ><a
             class="tel"
-            href="http://tel:+5355143022"
+            href="http://tel:+076830701"
             target="_blank"
             rel="noopener"
-            >+53 55143022</a
-          ></span
-        >
-      </li>
-    </ul>
-    <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
-    <ng-template #thenBlock
-      ><a
-        routerLink="/dashboard/addcasa"
-        routerLinkActive="active"
-        class="hw-btn"
-        >Adicionar Propiedad</a
-      ></ng-template
-    >
-    <ng-template #elseBlock
-      ><a routerLink="/addsolicitud" routerLinkActive="active" class="hw-btn"
-        >Propuesta de venta</a
-      ></ng-template
-    >
+            >76830701</a
+          >
+          <span
+            ><a
+              class="tel"
+              href="http://tel:+5355143022"
+              target="_blank"
+              rel="noopener"
+              >+53 55143022</a
+            ></span
+          >
+        </li>
+      </ul>
+      <div *ngIf="isAdmin; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock
+        ><a
+          routerLink="/dashboard/addcasa"
+          routerLinkActive="active"
+          class="hw-btn"
+          >Adicionar Propiedad</a
+        ></ng-template
+      >
+      <ng-template #elseBlock
+        ><a routerLink="/addsolicitud" routerLinkActive="active" class="hw-btn"
+          >Propuesta de venta</a
+        ></ng-template>
+
+    </div>
   </div>
-  <div class="om-social">
-    <a href="#"><i class="fa fa-facebook"></i></a>
-    <a href="#"><i class="fa fa-twitter"></i></a>
-    <a href="#"><i class="fa fa-youtube-play"></i></a>
-    <a href="#"><i class="fa fa-instagram"></i></a>
-    <a href="#"><i class="fa fa-pinterest-p"></i></a>
-  </div>
+
+
 </div>
 <!-- Offcanvas Menu Wrapper End -->
 

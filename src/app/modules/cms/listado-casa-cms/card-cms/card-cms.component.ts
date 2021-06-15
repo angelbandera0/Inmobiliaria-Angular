@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Roles } from './../../../../enums/roles.enum';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -24,10 +25,10 @@ export class CardCmsComponent implements OnInit {
     private casaService: CasaService,
     private likesService: LikesService,
     private modalService: NgbModal,
-    private tokenStorageService:TokenStorageService
+    private loginService:LoginService
   ) {
     console.log(this.user);
-    this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
+    this.isUser=this.loginService.userValue?.user?.rol.rol===Roles.USER_ROLE && this.loginService.userValue?.user?.rol.rol!=null;
   }
 
   ngOnInit(): void {

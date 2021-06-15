@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
+import { LoginService } from 'src/app/services/login.service';
 declare var activee: any;
 // Declaro las variables de jQuery
 declare var jQuery: any;
@@ -17,19 +18,20 @@ declare var webGlObject: any;
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  casas: Casa[]=[];
+  casas: Casa[] = [];
   user: User = new User();
   constructor(
     private casaService: CasaService,
     private notificationsToastrService: NotificationsToastrService,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
     activee($);
-    const id = this.tokenStorageService.getId();
-    if(id){
+    const id = this.loginService.userValue?.user?.uid;
+    console.log(id);
+    if (id) {
       this.userService.userById(id ? id : '').subscribe({
         next: (res) => {
           console.log(res);
@@ -41,7 +43,7 @@ export class ShopComponent implements OnInit {
           console.log(error);
         },
       });
-    }else{
+    } else {
       this.casasRecientes();
     }
   }

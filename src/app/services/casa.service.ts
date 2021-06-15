@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { GetCasaResponse } from './../models/get-casa-response.model';
 import { ListadoCasaResponse } from './../models/listado-casa-response.model';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -15,9 +16,9 @@ export class CasaService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private loginService:LoginService
   ) {
-    this.token = this.tokenStorageService.getToken();
+    this.token = this.loginService.userValue?.token;
     this.httpOptions = {
       headers: new HttpHeaders({ 'x-token': this.token }),
     };

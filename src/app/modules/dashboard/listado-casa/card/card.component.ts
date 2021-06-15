@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Roles } from 'src/app/enums/roles.enum';
@@ -35,13 +36,13 @@ export class CardComponent implements OnInit {
     private casaService: CasaService,
     private likesService: LikesService,
     private modalService: NgbModal,
-    private tokenStorageService: TokenStorageService,
+    private loginService: LoginService,
     private notificationsToastrService: NotificationsToastrService
   ) {
     console.log(this.user);
     this.isUser =
-      this.tokenStorageService.getAuthorities() === Roles.USER_ROLE &&
-      this.tokenStorageService.getAuthorities() != null;
+      this.loginService.userValue?.user?.rol.rol === Roles.USER_ROLE &&
+      this.loginService.userValue?.user?.rol.rol != null;
   }
 
   ngOnInit(): void {

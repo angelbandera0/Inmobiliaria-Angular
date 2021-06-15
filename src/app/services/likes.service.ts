@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoginService } from './login.service';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -13,13 +14,14 @@ export class LikesService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private loginService:LoginService
   ) {
-
+    this.token = this.loginService.userValue?.token;
   }
 
+
   addLike(data: FormData): Observable<any> {
-    this.token = this.tokenStorageService.getToken();
+    this.token = this.loginService.userValue?.token;
     this.httpOptions = {
       headers: new HttpHeaders({ 'x-token': this.token }),
     };
@@ -30,7 +32,7 @@ export class LikesService {
     );
   }
   removeLike(id: string): Observable<any> {
-    this.token = this.tokenStorageService.getToken();
+    this.token = this.loginService.userValue?.token;
     this.httpOptions = {
       headers: new HttpHeaders({ 'x-token': this.token }),
     };

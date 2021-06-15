@@ -20,7 +20,6 @@ export class CardListadoComponent implements OnInit {
     private casaService: CasaService,
     private likesService: LikesService,
     private modalService: NgbModal,
-    private tokenStorageService:TokenStorageService
   ) {
 
   }

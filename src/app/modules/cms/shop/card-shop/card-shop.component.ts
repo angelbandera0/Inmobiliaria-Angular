@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Roles } from 'src/app/enums/roles.enum';
@@ -10,7 +11,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-card-shop',
   templateUrl: './card-shop.component.html',
-  styleUrls: ['./card-shop.component.css']
+  styleUrls: ['./card-shop.component.css'],
 })
 export class CardShopComponent implements OnInit {
   @Input() casa!: Casa;
@@ -18,38 +19,34 @@ export class CardShopComponent implements OnInit {
   @Output() deleteRequest = new EventEmitter<string>();
   idDelete!: string;
   isLiked = false;
-  isUser=false;
-  like:any;
+  isUser = false;
+  like: any;
   constructor(
     private casaService: CasaService,
     private likesService: LikesService,
     private modalService: NgbModal,
-    private tokenStorageService:TokenStorageService
-  ) {
-
-  }
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     console.log(this.user);
-    this.isUser=this.tokenStorageService.getAuthorities()===Roles.USER_ROLE && this.tokenStorageService.getAuthorities()!=null;
-try {
-  for (let i = 0; i < this.casa.likes.length; i++) {
-    if (
-      (this.user.myLikes as unknown as string[]).includes(
-        this.casa.likes[i] as unknown as string
-      )
-    ) {
-      console.log('si');
-      this.isLiked = true;
-      this.like=this.casa.likes[i];
-      this.casa.like = this.casa.likes[i];
-    }
-  }
-} catch (error) {
-
-}
-
-
+    this.isUser =
+      this.loginService.userValue?.user?.rol.rol === Roles.USER_ROLE &&
+      this.loginService.userValue?.user?.rol.rol != null;
+    try {
+      for (let i = 0; i < this.casa.likes.length; i++) {
+        if (
+          (this.user.myLikes as unknown as string[]).includes(
+            this.casa.likes[i] as unknown as string
+          )
+        ) {
+          console.log('si');
+          this.isLiked = true;
+          this.like = this.casa.likes[i];
+          this.casa.like = this.casa.likes[i];
+        }
+      }
+    } catch (error) {}
   }
 
   openModalDialogDeletePropiedad(content: any, id: string) {
@@ -76,7 +73,7 @@ try {
     this.likesService.addLike(fd).subscribe({
       next: (res) => {
         console.log(res);
-        this.like=res.like._id;
+        this.like = res.like._id;
         this.isLiked = true;
         //window.location.reload();
       },
@@ -90,8 +87,8 @@ try {
     this.likesService.removeLike(idLike).subscribe({
       next: (res) => {
         console.log(res);
-        this.like=undefined;
-        this.isLiked=false;
+        this.like = undefined;
+        this.isLiked = false;
       },
       error: (e) => {
         console.log(e);

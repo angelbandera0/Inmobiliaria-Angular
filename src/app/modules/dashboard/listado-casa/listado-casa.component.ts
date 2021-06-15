@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { TiposPropiedades } from 'src/app/enums/tipos-propiedades.enum';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
@@ -48,7 +49,7 @@ export class ListadoCasaComponent implements OnInit {
   constructor(
     private casaService: CasaService,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService,
+    private loginService: LoginService
   ) {
     this.provincia = new Provincia();
     this.listadoProvincias = this.provincia.listadoProvincias;
@@ -60,7 +61,9 @@ export class ListadoCasaComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     activee($);
-    const id = this.tokenStorageService.getId();
+
+    const id = this.loginService.userValue?.user?.uid;
+    console.log(id);
     this.userService.userById(id ? id : 'none').subscribe({
       next: (res) => {
         console.log(res);
@@ -94,7 +97,7 @@ export class ListadoCasaComponent implements OnInit {
     });
   }
   async getUser(): Promise<void> {
-    const id = this.tokenStorageService.getId();
+    const id = this.loginService.userValue?.uid;
     this.userService.userById(id ? id : '').subscribe({
       next: (res) => {
         this.user = res.user;

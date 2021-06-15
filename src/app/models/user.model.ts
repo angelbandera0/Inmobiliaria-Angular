@@ -13,7 +13,9 @@ export class User {
   image: string;
   uid: string;
   password: string;
-  solicitudes:Solicitud[]
+  solicitudes: Solicitud[];
+  token: string;
+  user: any;
 
   constructor(
     name?: string,
@@ -26,7 +28,8 @@ export class User {
     myLikes?: Like[],
     solicitudes?: Solicitud[],
     image?: string,
-    uid?: string
+    uid?: string,
+    token?: string
   ) {
     this.rol = rol as Rol;
     this.google = google as boolean;
@@ -39,5 +42,6 @@ export class User {
     this.password = password as string;
     this.myLikes = myLikes as Like[];
     this.solicitudes = solicitudes as Solicitud[];
+    this.token = token as string;
   }
 }

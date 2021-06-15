@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoginService } from './login.service';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -13,9 +14,9 @@ export class CitaService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorageService: TokenStorageService
+    private loginService:LoginService
   ) {
-    this.token = this.tokenStorageService.getToken();
+    this.token = this.loginService.userValue?.token;
     this.httpOptions = {
       headers: new HttpHeaders({ 'x-token': this.token }),
     };

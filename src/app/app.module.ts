@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -10,13 +11,17 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { CmsComponent } from './layouts/cms/cms.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { ErrorComponent } from './layouts/error/error.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
 import {
   NgxUiLoaderModule,
   NgxUiLoaderRouterModule,
   NgxUiLoaderHttpModule,
 } from 'ngx-ui-loader';
+import { appInitializer } from './helper/app.initializer';
+import { ErrorInterceptor } from './helper/error.interceptor';
+import { JwtInterceptor } from './helper/jwt.interceptor';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,18 @@ import {
     NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      multi: true,
+      deps: [LoginService],
+    },CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

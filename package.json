@@ -29,6 +29,7 @@
     "angularx-social-login": "^3.5.5",
     "bootstrap": "^4.5.0",
     "moment": "^2.29.1",
+    "ngx-cookie-service": "^11.0.2",
     "ngx-skeleton-loader": "^2.9.1",
     "ngx-toastr": "^13.2.1",
     "ngx-ui-loader": "^10.0.0",

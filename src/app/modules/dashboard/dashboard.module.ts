@@ -20,13 +20,15 @@ import { DetallesSolicitudDashComponent } from './detalles-solicitud-dash/detall
 import { ListadoVentasDashComponent } from './listado-ventas-dash/listado-ventas-dash.component';
 import { SharedModule } from '../shared/shared.module';
 import { DetallesUserDashComponent } from './detalles-user-dash/detalles-user-dash.component';
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ShimmerListComponent } from './dashboard/shimmer-list/shimmer-list.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     AdicionarCasaComponent,
-    EditarCasaComponent,ListadoCasaComponent,
+    EditarCasaComponent,
+    ListadoCasaComponent,
     DetallesCasaComponent,
     CardComponent,
     SearchComponent,
@@ -35,13 +37,18 @@ import { DetallesUserDashComponent } from './detalles-user-dash/detalles-user-da
     DetallesCitaComponent,
     DetallesSolicitudDashComponent,
     ListadoVentasDashComponent,
-    DetallesUserDashComponent
+    DetallesUserDashComponent,
+    ShimmerListComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     NgbCarouselModule,
-    DashboardRoutingModule,FormsModule,ReactiveFormsModule
-  ],schemas:[CUSTOM_ELEMENTS_SCHEMA]
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSkeletonLoaderModule.forRoot(),
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardModule { }
+export class DashboardModule {}

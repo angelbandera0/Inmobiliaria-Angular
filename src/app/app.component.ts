@@ -1,5 +1,7 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component } from '@angular/core';
 import { NgxUiLoaderService } from "ngx-ui-loader";
+import { User } from './models/user.model';
 declare var activee:any;
 // Declaro las variables de jQuery
 declare var jQuery:any;
@@ -14,6 +16,11 @@ declare var webGlObject: any;
 })
 export class AppComponent {
   title = 'green-world-front-end';
+
+  constructor(private ngxService: NgxUiLoaderService) {
+
+  }
+
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -36,9 +43,5 @@ export class AppComponent {
     }, 5000);
 
   }
-
-constructor(private ngxService: NgxUiLoaderService){
-    //webGlObject.init();
-}
 
 }

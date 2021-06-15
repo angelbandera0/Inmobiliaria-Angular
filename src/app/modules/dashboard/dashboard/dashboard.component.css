@@ -1,0 +1,39 @@
+.caja{
+  height: 300px;
+}
+.separacion-h6{
+  margin-top: 7rem;
+  color: #666666;
+}
+.select-li:hover{
+  background-color: #f5f5f5;
+}
+
+.profilePic {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  background-color: #00C89E;
+  cursor: pointer;
+}
+.bgf-warn{
+  background-color: #ffc107 !important;
+}
+
+.propiedad-circle{
+  font-size: 35px;
+  margin-top: 0.7rem;
+  color: white;
+}
+.propiedad-circle1{
+  font-size: 35px;
+  margin-top: 0.8rem;
+  color: white;
+}
+.bg-success{
+  background-color: #00C89E;
+  color: white;
+}
+.point{
+  cursor: pointer;
+}
