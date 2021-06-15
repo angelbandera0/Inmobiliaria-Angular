@@ -98,6 +98,7 @@ export class LoginService {
   }
 
   refreshToken() {
+    console.log(this.cookieService.get('refreshToken'),"cookie");
     return this.http
       .post<any>(
         `${environment.server}/users/refresh-token`,

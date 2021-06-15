@@ -85,10 +85,10 @@
       <div class="col-lg-7">
         <div class="property-controls">
           <ul>
-            <li data-filter="all">Hoy</li>
-            <li data-filter=".apart">Última semana</li>
-            <li data-filter=".house">Último mes</li>
-            <li data-filter=".office">Último año</li>
+            <li data-filter="all"  [ngClass]="{'select-filter': filterDay.get('hoy')}" (click)="setSelection($event,'hoy')">Hoy</li>
+            <li data-filter=".apart" [ngClass]="{'select-filter': filterDay.get('semana')}" (click)="setSelection($event,'semana')">Última semana</li>
+            <li data-filter=".house" [ngClass]="{'select-filter': filterDay.get('mes')}" (click)="setSelection($event,'mes')">Último mes</li>
+            <li data-filter=".office" [ngClass]="{'select-filter': filterDay.get('anno')}" (click)="setSelection($event,'anno')">Último año</li>
           </ul>
         </div>
       </div>
@@ -98,29 +98,49 @@
       <div class="col-lg-4 col-md-6 mix all house">
         <ng-container *ngIf="citasShow; else elseTemplate">
           <div class="pi-pic set-bg">
-            <h5>Citas Pendientes</h5>
+            <h6>Citas Pendientes <span *ngIf="citasShow.length != 0" class="badge rounded-pill bg-warning">{{citasShow.length}}</span></h6>
           </div>
           <ng-container *ngIf="citasShow.length != 0; else elseTemplate">
             <div class="overflow-auto caja">
               <ul class="list-group list-group-flush">
                 <li
                   *ngFor="let cita of citasShow"
-                  class="list-group-item select-li"
+                  class="list-group-item select-li point"
+                  routerLink="/dashboard/detallescita/{{cita._id}}" routerLinkActive="active"
                 >
-                  An item
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="profilePic text-center bgf-warn" >
+                        <i class="fa fa-calendar propiedad-circle1"></i>
+                      </div>
+                    </div>
+                    <div class="col-sm-9 fuente">
+                      <div>
+                        <b>Realizada: </b> {{ parserFecha(cita.createdAt) }}
+                      </div>
+                      <div><b>Solicitante: </b> {{ cita.user.name }}</div>
+                      <div>
+                        <b>Propiedad: </b> <a routerLink="/dashboard/detallescasa/{{cita.casa._id}}" routerLinkActive="active">Ver datos</a>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               </ul>
             </div>
           </ng-container>
           <ng-template #elseTemplate>
-            <div class="overflow-auto caja text-center">
-              <h6 class="separacion-h6">No hay citas pendientes.</h6>
+            <div class="overflow-auto caja text-center empty">
+              <div class="separacion-h6">
+                <i class="fa fa-archive ico-v"></i>
+                <h6 class="h6-v">No hay citas pendientes.</h6>
+              </div>
+
             </div>
           </ng-template>
 
-          <div class="text-center">
-            <a routerLink="/dashboard/listadocitas" routerLinkActive="active"
-              >Ver más</a
+          <div class="text-center separacion">
+            <a class="link-c" routerLink="/dashboard/listadocitas" routerLinkActive="active"
+              >Ver Más</a
             >
           </div>
         </ng-container>
@@ -132,7 +152,7 @@
       <div class="col-lg-4 col-md-6 mix all house">
         <ng-container *ngIf="solicitudesShow; else elseTemplate">
           <div class="pi-pic set-bg">
-            <h5>Solicitudes Pendientes <span *ngIf="solicitudesShow.length != 0" class="badge rounded-pill bg-warning">{{solicitudesShow.length}}</span></h5>
+            <h6>Solicitudes Pendientes <span *ngIf="solicitudesShow.length != 0" class="badge rounded-pill bg-warning">{{solicitudesShow.length}}</span></h6>
           </div>
 
           <ng-container *ngIf="solicitudesShow.length != 0; else elseTemplate">
@@ -149,7 +169,7 @@
                         <i class="fa fa-file propiedad-circle1"></i>
                       </div>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 fuente">
                       <div>
                         <b>Realizada: </b> {{ parserFecha(sol.createdAt) }}
                       </div>
@@ -164,15 +184,18 @@
             </div>
           </ng-container>
           <ng-template #elseTemplate>
-            <div class="overflow-auto caja text-center">
-              <h6 class="separacion-h6">No hay solicitudes pendientes.</h6>
+            <div class="overflow-auto caja text-center empty">
+              <div class="separacion-h6">
+                <i class="fa fa-archive ico-v"></i>
+                <h6 class="h6-v">No hay solicitudes pendientes.</h6>
+              </div>
             </div>
           </ng-template>
-          <div class="text-center">
-            <a
+          <div class="text-center separacion">
+            <a class="link-c"
               routerLink="/dashboard/listadosolicitudes"
               routerLinkActive="active"
-              >Ver más</a
+              >Ver Más</a
             >
           </div>
         </ng-container>
@@ -184,7 +207,7 @@
       <div class="col-lg-4 col-md-6 mix all house">
         <ng-container *ngIf="ventasShow; else elseTemplate">
           <div class="pi-pic set-bg">
-            <h5>Ventas Efectuadas <span *ngIf="ventasShow.length != 0" class="badge rounded-pill bg-success">{{ventasShow.length}}</span></h5>
+            <h6>Ventas Efectuadas <span *ngIf="ventasShow.length != 0" class="badge rounded-pill bg-success">{{ventasShow.length}}</span></h6>
 
           </div>
 
@@ -201,7 +224,7 @@
                         <i class="fa fa-home propiedad-circle"></i>
                       </div>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 fuente">
                       <div>
                         <b>Efectuada: </b> {{ parserFecha(venta.createdAt) }}
                       </div>
@@ -216,13 +239,16 @@
             </div>
           </ng-container>
           <ng-template #elseTemplate>
-            <div class="overflow-auto caja text-center">
-              <h6 class="separacion-h6">No se han efectuado ventas.</h6>
+            <div class="overflow-auto caja text-center empty">
+              <div class="separacion-h6">
+                <i class="fa fa-archive ico-v"></i>
+                <h6 class="h6-v">No se ha efectuado ventas.</h6>
+              </div>
             </div>
           </ng-template>
-          <div class="text-center">
-            <a routerLink="/dashboard/listadocitas" routerLinkActive="active"
-              >Ver más</a
+          <div class="text-center separacion">
+            <a class="link-c" routerLink="/dashboard/listadocitas" routerLinkActive="active"
+              >Ver Más</a
             >
           </div>
         </ng-container>

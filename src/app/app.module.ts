@@ -18,10 +18,10 @@ import {
   NgxUiLoaderRouterModule,
   NgxUiLoaderHttpModule,
 } from 'ngx-ui-loader';
-import { appInitializer } from './helper/app.initializer';
-import { ErrorInterceptor } from './helper/error.interceptor';
-import { JwtInterceptor } from './helper/jwt.interceptor';
 import { CookieService } from 'ngx-cookie-service';
+import { appInitializer } from './helpers/app.initializer';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
