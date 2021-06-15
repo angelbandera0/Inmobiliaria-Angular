@@ -64,11 +64,11 @@
                 </div>
                 <br />
                 <div *ngIf="this.existError" class="alert alert-danger" role="alert">
-                  <b>Han ocurrido los siguientes errores:</b>
+                  <b>Ha ocurrido un error:</b>
                   <br>
                   <hr>
-                  <li *ngFor="let error of errorsList; index as i; first as isFirst">
-                    {{error}}
+                  <li class="left" >
+                    Por favor compruebe su correo y su contraseña. Las credenciales no son correctas.
                   </li>
                 </div>
                 <br />

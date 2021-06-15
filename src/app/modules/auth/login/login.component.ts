@@ -1,3 +1,4 @@
+import { NotificationsToastrService } from 'src/app/services/notifications-toastr.service';
 import { ResponseGoogleLogin } from './../../../models/response-google-login.model';
 import { Roles } from './../../../enums/roles.enum';
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
@@ -50,7 +51,8 @@ export class LoginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private notificationsToastrService:NotificationsToastrService
   ) {
     // redirect to home if already logged in
     console.log(this.loginService.userValue);
@@ -107,12 +109,8 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         },
         error: (error) => {
-          console.log(error);
-          /*if (!error?.error?.msg) {
-            this.errorsList.push(error.error.errors[0].msg);
-          } else {
-            this.errorsList.push(error.error.msg);
-          }*/
+
+          this.notificationsToastrService.showError('Ha ocurrido un error al intentar iniciar sesión en el sistema.');
           this.existError = true;
           this.loading = false;
         },
